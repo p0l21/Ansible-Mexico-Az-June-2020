@@ -1,0 +1,51 @@
+Program 1
+ansible localhost -m  group -a "name=deploy state=present" 
+Program 2
+ansible localhost -m user -a "name=deploy-user group=deploy shell=/bin/bash"
+Program 3
+ansible localhost -m yum -a"name=httpd state=installed"    
+Program 4
+ansible localhost -m service -a"name=httpd state=started enabled=True"
+Program 5
+ansible localhost -m lineinfile -a " path=/var/www/html/index.html line='Copyright yomero 2020' "
+Program 6
+ansible localhost -m file -a " path=/var/www/html/second.html state=touch "
+ansible localhost -m lineinfile -a " path=/var/www/html/second.html line='This is second' "
+Program 7
+ansible localhost -m yum -a"name=git,wget state=installed" 
+Program 8
+ansible localhost -m git -a "repo=https://github.com/scmgalaxy/ansible-role-template dest=/tmp/project"
+Program 9 
+[root@ip-172-31-9-55 ~]# ansible localhost -m reboot
+localhost | FAILED! => {
+    "changed": false,
+    "elapsed": 0,
+    "msg": "Running reboot with local connection would reboot the control node.",
+    "rebooted": false
+}
+
+Program 10 
+
+[root@ip-172-31-9-55 ~]# ansible localhost -m file -a " path=/opt/devopsschool.txt state=touch "
+localhost | CHANGED => {
+    "changed": true,
+    "dest": "/opt/devopsschool.txt",
+    "gid": 0,
+    "group": "root",
+    "mode": "0644",
+    "owner": "root",
+    "secontext": "unconfined_u:object_r:usr_t:s0",
+    "size": 0,
+    "state": "file",
+    "uid": 0
+}
+[root@ip-172-31-9-55 ~]# ls -l /opt/devopsschool.txt
+-rw-r--r--. 1 root root 0 Jun 19 18:29 /opt/devopsschool.txt
+[root@ip-172-31-9-55 ~]# ansible localhost -m file -a " path=/opt/devopsschool.txt state=absent "
+localhost | CHANGED => {
+    "changed": true,
+    "path": "/opt/devopsschool.txt",
+    "state": "absent"
+}
+[root@ip-172-31-9-55 ~]# ls -l /opt/devopsschool.txt
+ls: cannot access /opt/devopsschool.txt: No such file or directory
