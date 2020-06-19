@@ -1,0 +1,30 @@
+1. Create a group
+ansible localhost -m group -a"name=deploy"
+
+2. Create user
+ansible localhost -m user -a"name=deploy-user groups=deploy"
+
+3. install package httpd
+ansible localhost -m yum -a"name=httpd state=installed"
+
+4. Start service httpd
+ansible localhost -m service -a"name=httpd state=started"
+
+5. File index.html
+ansible localhost -m copy -a"src=index.html dest=/var/www/html"
+
+6. Copy second.html
+ansible localhost -m copy -a"src=second.html dest=/var/www/html"
+
+7.install wget and github
+ansible localhost -m yum -a"name=git,wget state=installed"
+
+8. Clone a git repo
+ansible localhost -m git -a"repo=https://github.com/scmgalaxy/ansible-role-template dest=/root/clonedrepo"
+
+9. Reboot the server
+ansible localhost -m reboot -a"reboot_timeout=10 msg="Rebooting host""
+
+10. Create a file and then delete it
+ansible localhost -m file -a"path=/opt/devopsschool.txt state=touch"
+ansible localhost -m file -a"path=/opt/devopsschool.txt state=absent"
