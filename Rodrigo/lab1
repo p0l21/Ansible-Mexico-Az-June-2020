@@ -1,0 +1,17 @@
+5  sudo yum install ansible -y
+    6  ansible localhost -m group -a "name=deploy state=present"
+    7  sudo ansible localhost -m group -a "name=deploy state=present"
+    8  sudo ansible localhost -m user -a "name=deploy-user group=deploy shell=/bin/bash"
+   11  sudo ansible localhost -m yum -a "name=httpd state=latest"
+   12  sudo ansible localhost -m service -a "name=httpd state=started enabled=yes"
+   16  sudo ansible localhost -m cp -a "src=index.html dest=/var/www/html"
+   17  sudo ansible localhost -m copy -a "src=index.html dest=/var/www/html"
+   20  sudo ansible localhost -m copy -a "src=second.html dest=/var/www/html"
+   21  sudo ansible localhost -m yum -a "name=git state=latest"
+   22  sudo ansible localhost -m yum -a "name=wget state=latest"
+   24  sudo ansible localhost -m git -a "repo=https://github.com/scmgalaxy/ansible-role-template dest=/home/ec2-user"
+   25  sudo ansible localhost -m git -a "repo=https://github.com/scmgalaxy/ansible-role-template dest=/home/ec2-user/ans-gax"
+   30  sudo ansible localhost -m file -a "path=/opt/devopsschool.txt"
+   31  sudo ansible localhost -m file -a "path=/opt/devopsschool.txt state=touch"
+   32  sudo ansible localhost -m file -a "path=/opt/devopsschool.txt state=touch state=absent"
+   34  sudo ansible localhost -m reboot
