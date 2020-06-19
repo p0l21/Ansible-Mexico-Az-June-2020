@@ -1,0 +1,410 @@
+Rajesh Kumar
+================
+www.rajeshkumar.xyz
+-------------------
+1 2 3 4 5 6 7 8 9 0 
+=============================
+Discussion Vs Demo VS Lab
+------------------
+20% Vs 40% Vs 40%
+---------------------------
+AWS - Demo and Lab.
+--------------------------
+IST Vs Mexico Time
+------------------------
+7: PM IST  - 12 AM 
+8:30 AM - 1 PM
+-----------------------
+2 Break - For tea - Coffee and rest room - at 15 mins.
+ - ---
+9 PM IST
+10: 30 PM IST
+=============================================
++91 8105843520
+============================================
+
+Why we all are working in software Engineering?
+================================================
+Software Development
+----------
+	Immediate release
+	Reduce a cost
+		Dev
+		Running
+	Improving a Quality
+===========================================
+Software Dev Model
+	Waterfall --> Agile --> DevOps -> DevSecOps
+				SRE
+DevOps  - https://www.devopsschool.com/videos/387/complete-cicd-devops-implementation-from-scratch-using-jenkins-by-devopsschool/
+
+Software Dev Architecture
+	Monolitic --> SOA -> Microservices
+
+Software Dev Platform
+	PHYSICAL --> Virtual --> Container
+
+Consumtions Trend
+	Laptop/Desktop -----> Mobile
+	DISTRIBUTED --------> CENTRAL
+===================================================================
+Where a Ansible is coming in all growth???
+For  - Configuration & Deployment Management
+
+
+What is Ansible?
+==============================
+	Configuration mgmt tool.
+	From Redhat
+	Written in pYthon.
+	release
+		Ansible -----> CMD tool -- FREE - Community
+		Ansible TOWER  --> CMD tool + GUI -- For Enterprises + Only Free for 10 Server.
+		Ansible AWX --> CMD tool + GUI BUT MOST Latest Code which is not TESTED - No production grade for trial purpose.
+	Plugins Concept
+		Core Plugins
+		Custom Plugins - Community Plugins
+	1000s of Modules
+	1000s of Roles
+	Agent Less.
+	Domain Specific Lang for Servers mgmt 
+
+What is Configuration mgmt?
+	Server(S) Configuration mgmt
+		PHYSCIAL Server
+		VM Server
+				Pvt cloud - vmware
+				Pub Cloud - Aws
+
+What is there in SERVER?
+	-------------------Resources of Server-----------------------
+	Software(vmware)
+			Hardware
+				Memory
+				Harddisk
+				CPU
+	Software
+		Package
+		file
+		directory
+		services
+		apt
+		yum
+		bash
+		ps
+	People
+		user
+		group
+	Process
+		policy
+
+	Ansible is CM tool coz it manages a config of resources of server at parell level for many servers
+
+	
+Why Ansible?
+=======================
+	SHELL SCRIPTING 
+		For Windows??????
+		For Linux???
+	PS SCRIPTING
+		For Linux?
+		For all WINDOWS?
+	We need platform indepent tool.
+		- JAVA - DOTNET - PYTHON - PERL - RUBY 
+		- Are they easy to learn/test/share/extend/debug?
+			- 30 days+ 60 days = 90 days.
+		Ansible -- 2 Days.
+	Ansible is easy learn/test/share/extend/debug
+	
+	Ansible has Capability to manage larger(multiple) server(s) config mgmt at a time
+	
+	Ansible is IDEOMPOTENT
+	Human ---> We Desire in server --> Tool should check if Desire==Actual
+									No Change
+							     if Desire!=Actual
+									Do change
+	First - 10 Steps ----> 1 mins --> 10 mins---
+	Second - 2 Step    -- 1 mins ----- 2 mins.
+				------------------
+				8mins.
+
+	===========================
+	Reducing a cost 
+	Consisten server change mgmt
+	Improving a quality of the deployment
+	Saving time.
+
+Other Tools - 
+		Ansible - Puppet - Chef - Salt - Cfengie
+		GUI - Octopus Deploy - UDeploy
+		===========================================
+		1 Deployment ----- 3 mins--------
+		1000 Deployment ---- 3 mins only
+		-------------------------------------------
+		10000 Deployment - 1 SECONDS
+				Container using Docker and Kubernetes.
+		----------------------------------
+
+
+How ansible works!!!!
+	AKA 
+Ansible Architecure.
+=======================================================
+
+Human --> Ansible Control Server ----> Ansible remote Server(S)
+		ACS				ARS(S)
+
+		LINUX 64 BIT ONLY	ANY (WINDOWS + LINUX) + 32 BIT + 64 BIT
+		(rhEL + Debian)
+
+		PYTHON 2.7.X		WINDOWS ( PS 3.0 + DOTNET 4.0 + WINRM)
+					LINUX - PYTHON 2.7.X + SSH enabled
+
+		ACS     ---------->	WINDOWS ARS using HTTP/HTTPS
+		ACS     ---------->	SSH PROTOCOL	
+		==========================================
+		PYTHON 3.X IS NOT a UPGRADE OF PYTHON 2.X
+		IF module is written in 3.X - Then you can change Python intr* through Ansible.
+		==========================================
+
+Components of Ansible Control Server(ACS)
+=================================
+Ansible 
+		Ansible
+		1000s of Core Modules
+		100s of Core Plugins
+		Config file.
+Human 	
+	Playbook/Roles
+	Inventory
+=====================================
+What is Plugins? 
+	All Func of Ansible comes from Plugins(Written in Python)
+What is Modules?
+	Each Module would do ONE task
+				such as copy, delete file, install, etc.
+				Written in PYTHON | PS | ANY LANG
+	Sent by ACS from ACS to ARS
+	Run in ARS
+What is Config file?
+	a file
+	Which control behaviour of Ansible(EXEUTABLE)
+What is Playbook/Roles?
+	It is a program file.
+	Which Contains Modules spec
+What is Inventory?
+	may be a file.
+	it contains. 
+		LIST of IP Adresses.
+
+===========================================================
+Roles in Ansible
+--------------------------------
+	Dev
+		- Write and test a Ansible Program.
+				Playbook
+				Roles
+				Custom Module
+					ONE PROGRAMMING.
+	Ops	
+		- Manage Inventory/Access/etc and Apply "Ansible Program" in required inventory. 
+------------------------------------
+	BOTH
+
+How to become Ansible Dev?
+--------------------------
+
+How to become Java Dev?
+--------------------------
+JDK -> .JAVA         -> .Class(s)  --> jar -> War  --TESTED IT LOCALLY
+	- VARAIBLES
+	- OPERATORS
+	- Conditioning
+	- Looping
+	- Method/Function
+
+WAR ----> RUN ---- 
+
+How to become Ansible Dev?
+--------------------------
+Ansible(10+ Tools) -> .YAML(Playbook)     ------> Roles
+		- VARAIBLES				PLAYBOOK(S)
+		- OPERATORS				files
+		- Conditioning				template
+		- Looping				handlers
+		- Method/Function			vars
+
+Roles --> test it Locally ----> Ops ---> RUN
+
+====================================================================
+====================================================================
+
+Compiled Lang ==> Intepreted Lang ==> Domain Specific Lang(Ansible)
+						Declare
+							XML
+							YAML
+							JSON
+====================================================================
+====================================================================
+RHEL-7.5_HVM_GA-20180322-x86_64-1-Hourly2-GP2 (ami-5b673c34)
+ACS - 13.233.103.35
+user - ec2-user
+
+How to install Ansible?
+https://www.devopsschool.com/blog/how-to-install-ansible-in-centos-7-rhel-7/
+
+$ sudo yum install wget -y
+$ wget https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+$ sudo yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+$ sudo rpm -i epel-release-latest-7.noarch.rpm 
+$ sudo yum install ansible -y
+
+
+$ ansible --version
+$ cd /usr/lib/python2.7/site-packages/ansible
+cd plugins
+$ find . -name *.py | wc -l
+cd ..
+cd modules
+$ find . -name *.py | wc -l
+$ ls /etc/ansible/ansible.cfg
+$ vi /etc/ansible/ansible.cfg
+======================================
+======================================
+
+- create one dir...
+or
+- install one pack.
+
+		SHELL  ----
+		CMD -----		YES
+===================================================
+Ansible ADHOC Command
+===================================================
+$ ansible -h
+	optional arguments
+	Connection Options		- Authentication
+	Privilege Escalation Options	- Authorization
+
+$ ansible localhost
+=====================================================
+Project - Setup a Webserver(HTTPD) in RHEL.
+
+- psucode
+Step 1 - Install (HTTPD) Package		-> WHICH MODULE?	WHICH PARAMETERS?		
+Step 2 - Copy a index.html to /var/www/html	-> WHICH MODULE?	WHICH PARAMETERS?	
+Step 3 - Start a service.			-> WHICH MODULE?	WHICH PARAMETERS?
+"ansible module for" 
+
+https://docs.ansible.com/ansible/latest/modules/modules_by_category.html
+Category of Modules
+		Modules
+			Paramters
+				type
+				    Required / Optional.
+copy a file.
+	-- what file
+	- from where
+	- to where?
+	owner
+	permision
+delete a file
+	- what file
+	- from where
+Isntall a pack
+	- What pack?
+you want to start service
+	- What service?
+
+- psucode
+- install jre
+- install tomcat
+- config tomcat
+- install httpd
+- config httpd
+- download war file
+- config war.
+- deplot war
+- start tomcat
+- start httpd
+
+
+- psucode
+Step 1 - Install (HTTPD) Package		-> yum			WHICH PARAMETERS?		
+Step 2 - Copy a index.html to /var/www/html	-> copy			WHICH PARAMETERS?	
+Step 3 - Start a service.			-> service		WHICH PARAMETERS?
+"ansible module for" 
+
+yum
+https://docs.ansible.com/ansible/latest/modules/yum_module.html
+Copy
+https://docs.ansible.com/ansible/latest/modules/copy_module.html
+service
+https://docs.ansible.com/ansible/latest/modules/service_module.html
+
+
+$ ansible localhost <<What Module>> <<WHICH PARAMETERS>>
+========================================================
+
+ansible localhost -m yum -a"name=httpd state=installed"
+ansible localhost -m copy -a"src=index.html dest=/var/www/html"
+ansible localhost -m service -a"name=httpd state=started"
+
+index.html
+-------------
+<html>
+<head>
+<title>
+This is World of Ansible 
+</title>
+</head>
+<body>
+<h1> Welcome to DevOpsSchool.com Ansible Classs </h1>
+</body>
+</html>
+
+
+Step 1 - Register and Verify your account at GITHUB.com
+Step 2 - Fill this form - 
+
+Lab - 
+Please do all whatever above i did in Notepad.
+
+Assignment - 
+https://www.devopsschool.com/blog/ansible-adhoc-commands-lab-excercise-part-1/
+
+Selene Gomez	13.127.30.198	ec2-user
+jose alfredo jimenez	13.233.76.233	ec2-user
+Ted Tansill	13.235.91.209	ec2-user
+Jorge Luis Peñuelas Montoya	3.7.253.45	ec2-user
+Ruben Omar Ruiz Madrigal	15.206.186.152	ec2-user
+Carlos Mercado Lara	13.232.232.44	ec2-user
+Francisco Javier García García	13.127.47.220	ec2-user
+Aguilar, Oswaldo	52.66.30.115	ec2-user
+Jesus Rodrigo Aldana Torres	13.233.98.84	ec2-user
+Ana Isabel Durán	13.233.145.213	ec2-user
+B ill Zoromski	3.7.252.183	ec2-user
+Jorge Barrios	13.233.144.163	ec2-user
+Joaquin Hernandez Sandoval	13.127.157.235	ec2-user
+Hugo Briones	13.126.181.20	ec2-user
+Jorge Gutierrez	52.66.250.44	ec2-user
+Bill Zoromski	13.232.84.109	ec2-user
+Paul Ponce	13.235.69.159	ec2-user
+Jorge Gonzalez	13.233.144.42	ec2-user
+Maira Gueta	13.232.69.245	ec2-user
+Janeth Ceballos	13.126.0.146	ec2-user
+Ivan Figueroa	13.127.225.180	ec2-user
+	13.233.255.214	ec2-user
+
+Windows - Putty - PPK - rajesh-mumbai.ppk
+MAC - SSH - PEM - rajesh-mumbai.pem
+From - 
+https://www.devopsschool.com/notes/docker/2019/
+
+
+
+
+
+
+
+
