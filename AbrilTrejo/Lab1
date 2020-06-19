@@ -1,0 +1,22 @@
+1:
+ansible localhost -m group -a "name=deploy state=present"
+2:
+ansible localhost -m user -a "name=deploy-user groups=deploy shell=/bin/bash"
+3:
+ansible localhost -m yum -a"name=httpd state=installed"
+4:
+ansible localhost -m service -a"name=httpd state=started enabled=true"
+5:
+ansible localhost -m copy -a"src=index.html dest=/var/www/html"
+6:
+ansible localhost -m yum -a"name=wget state=installed"
+7:
+ansible localhost -m yum -a"name=git state=installed"
+8:
+ansible localhost -m git -a "repo=https://github.com/scmgalaxy/ansible-role-template dest=/src/ansible "
+9:
+ansible localhost -m reboot
+10:
+ansible localhost -m file -a "path=/opt/devopsschool.txt state=touch"                                                                                                       
+11:                                                                                                                                                                                                                                                                                
+ansible localhost -m file -a "path=/opt/devopsschool.txt state=absent"
