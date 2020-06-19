@@ -1,0 +1,116 @@
+sudo yum install wget -y
+wget https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+sudo yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+sudo rpm -i epel-release-latest-7.noarch.rpm
+sudo yum install ansible -y
+ansible --version
+vi index.html
+ansible localhost -m yum -a"name=httpd state=installed"
+ansible localhost -m copy -a"src=index.html dest=/var/www/html"
+ansible localhost -m service -a"name=httpd state=started"
+
+
+Program 1 – Write a Ansible Adhoc Commands to create a group called “deploy"
+
+ ansible localhost -m group -a "name=deploy"
+localhost | CHANGED => {
+    "changed": true,
+    "gid": 1001,
+    "name": "deploy",
+    "state": "present",
+    "system": false
+}
+
+
+Program 2 – Write a Ansible Adhoc Commands to create a user called “deploy-user” which is part of group called “deploy” and with /bin/bash shell.
+
+ansible localhost -m user -a "group=deploy,name=deploy-user,shell=/bin/bash"
+
+localhost | CHANGED => {
+    "changed": true,
+    "comment": "",
+    "create_home": true,
+    "group": 1001,
+    "home": "/home/deploy-user",
+    "name": "deploy-user",
+    "shell": "/bin/bash",
+    "state": "present",
+    "system": false,
+    "uid": 1001
+}
+
+
+Program 3 – Write a Ansible Adhoc commands install package named “httpd” in RHEL/centos.
+
+ ansible localhost -m yum -a"name=httpd state=installed"
+
+
+Program 4 – Write a Ansible Adhoc commands to start and enable the service named “httpd”
+ ansible localhost -m service -a"name=httpd state=started"
+ ansible localhost -m service -a"name=httpd state=enabled"
+
+
+Program 5 – Write a Ansible commands to create a file called “index.html” in /var/www/html with some dummy html contents.
+vi index.html
+
+Program 6 – Write a Ansible commands to copy a file called “second.html” in /var/www/html/second.html with some dummy html contents.
+
+ansible localhost -m copy -a"src=second.html dest=/var/www/html"
+
+
+Program 7 – Write a Ansible commands to install a package called “git”, “wget”.
+
+ ansible localhost -m yum -a"name=git state=installed"
+ ansible localhost -m yum -a"name=wget state=installed"
+
+Program 8 – Write a Ansible Adhoc commands to clone git repo. https://github.com/scmgalaxy/ansible-role-template.
+
+
+
+[root@ip-172-31-2-89 ~]#  ansible localhost -m git -a"clone=yes repo=https://github.com/scmgalaxy/ansible-role-template dest=/src"  localhost | CHANGED => {
+    "after": "d3eefe03c1bb6c9b0e1574347523174a26d015ff",
+    "before": null,
+    "changed": true
+}
+[root@ip-172-31-2-89 ~]# ls /src
+bennojoy.mysql  inventory  node.pem  rajesh.role1  README.md  site.retry  site.yaml
+
+
+Program 9 – Write a Ansible commands to reboot a self machine.
+
+[root@ip-172-31-2-89 ~]#  ansible localhost -m reboot
+localhost | FAILED! => {
+    "changed": false,
+    "elapsed": 0,
+    "msg": "Running reboot with local connection would reboot the control node.",
+    "rebooted": false
+}
+
+
+Program 10 – Write a Ansible commands to touch a file called “devopsschool.txt” in /opt/ and delete after using ansible adhoc command.
+
+ansible localhost -m file   -a"path=/opt/devopsschool.txt state=touch"
+[root@ip-172-31-2-89 ~]# ansible localhost -m file   -a"path=/opt/devopsschool.txt state=touch"
+localhost | CHANGED => {
+    "changed": true,
+    "dest": "/opt/devopsschool.txt",
+    "gid": 0,
+    "group": "root",
+    "mode": "0644",
+    "owner": "root",
+    "secontext": "unconfined_u:object_r:usr_t:s0",
+    "size": 0,
+    "state": "file",
+    "uid": 0
+}
+
+
+[root@ip-172-31-2-89 ~]# ansible localhost -m file   -a"path=/opt/devopsschool.txt state=absent"
+localhost | CHANGED => {
+    "changed": true,
+    "path": "/opt/devopsschool.txt",
+    "state": "absent"
+}
+
+
+
