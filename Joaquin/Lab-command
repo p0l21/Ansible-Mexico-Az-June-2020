@@ -1,0 +1,11 @@
+ansible localhost -m group -a "name=deploy state=present" 
+ansible localhost -m user -a "name=deploy-user group=deploy createhome=yes" -b
+ansible localhost -s -m service -a "name=httpd state=started enabled=yes"
+ansible localhots -m copy -a 'src=/var/www/html/index.html dest=/var/www/html/second.html'
+ansible localhost -s -m yum -a "name=git state=present"
+ansible localhost -s -m yum -a "name=wget state=present"
+ansible localhost -m git -a "repo=https://github.com/devopsschool-training-notes/Ansible-Mexico-Az-June-2020.git  dest=/root/clone"
+ansible localhost -a "/sbin/reboot"
+ansible localhost -m file -a "path=/opt/devopsschool.txt state=touch mode=0755"
+ansible localhost -m file -a "dest=/opt/devopsschool.txt state=absent"
+ansible localhost -m file -a "dest=/var/www/html/index2.html state=present"
