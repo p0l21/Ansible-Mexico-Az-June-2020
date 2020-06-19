@@ -1,0 +1,8 @@
+	sudo ansible localhost -m group -a "name=deploy"
+	sudo ansible localhost -m user -a "name=deploy-user group=deploy"
+	sudo ansible localhost -m yum -a "name=httpd state=installed"
+	sudo ansible localhost -m service -a "state=started name=httpd"
+	sudo ansible localhost -m file -a "path=/var/www/html/second.html state=touch"
+	sudo ansible localhost -m copy "src=index.html dest=/var/www/html/index.html"
+	sudo ansible localhost -m yum -a "name=wget name=git state=installed"
+	sudo ansible localhost -m git -a "repo=https://github.com/scmgalaxy/ansible-role-template dest=/home/ec2-user/git"
