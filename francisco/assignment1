@@ -1,0 +1,58 @@
+1. sudo ansible localhost -m group -a "name=deploy"
+localhost | CHANGED => {
+    "changed": true,
+    "gid": 1001,
+    "name": "deploy",
+    "state": "present",
+    "system": false
+}
+
+ 2. sudo ansible localhost -m user -a "name=deploy-user group=deploy"
+localhost | CHANGED => {
+    "changed": true,
+    "comment": "",
+    "create_home": true,
+    "group": 1001,
+    "home": "/home/deploy-user",
+    "name": "deploy-user",
+    "shell": "/bin/bash",
+    "state": "present",
+    "system": false,
+    "uid": 1001
+}
+
+3. sudo ansible localhost -m yum -a "name=httpd state=installed"
+4. sudo ansible localhost -m service -a "state=started name=httpd"
+5. sudo ansible localhost -m file -a "path=/var/www/html/second.html state=touch"
+localhost | CHANGED => {
+    "changed": true,
+    "dest": "/var/www/html/second.html",
+    "gid": 0,
+    "group": "root",
+    "mode": "0644",
+    "owner": "root",
+    "secontext": "unconfined_u:object_r:httpd_sys_content_t:s0",
+    "size": 0,
+    "state": "file",
+    "uid": 0
+}
+6.- sudo ansible localhost -m copy "src=index.html dest=/var/www/html/index.html"
+7. sudo ansible localhost -m yum -a "name=wget name=git state=installed"
+
+ 8. sudo ansible localhost -m git -a "repo=https://github.com/scmgalaxy/ansible-role-template dest=/home/ec2-user/git"
+localhost | CHANGED => {
+    "after": "d3eefe03c1bb6c9b0e1574347523174a26d015ff",
+    "before": null,
+    "changed": true
+}
+[ec2-user@ip-172-31-13-156 git]$ ls -l
+total 20
+drwxr-xr-x. 8 root root  109 Jun 19 18:22 bennojoy.mysql
+-rw-r--r--. 1 root root   41 Jun 19 18:22 inventory
+-rw-r--r--. 1 root root 1671 Jun 19 18:22 node.pem
+drwxr-xr-x. 8 root root  105 Jun 19 18:22 rajesh.role1
+-rw-r--r--. 1 root root  100 Jun 19 18:22 README.md
+-rw-r--r--. 1 root root   10 Jun 19 18:22 site.retry
+-rw-r--r--. 1 root root  115 Jun 19 18:22 site.yaml
+
+ 9. sudo ansible localhost -m file -a "path=/opt/devopsschool.txt state=touch" && sudo rm /opt/devopsschool.txt
