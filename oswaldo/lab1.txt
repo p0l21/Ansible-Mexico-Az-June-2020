@@ -1,0 +1,29 @@
+yum install -y wget
+wget https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+sudo yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+rpm -i epel-release-latest-7.noarch.rpm
+yum install ansible -y
+ansible --version
+ansible localhost -m groupadd -a"name=deploy state=present"
+ansible localhost -m group -a"name=deploy state=present"
+ansible localhost -m user -a"name=deploy-user group=deploy state=present"
+cat /etc/passwd
+passwd deploy-user
+ansible localhost -m yum -a"name=httpd state=installed"
+rpm -qa | grep -i httpd
+systemctl status httpd
+vi index.html
+ansible localhost -m copy -a"src=index.html dest=/var/www/html"
+cat /var/www/html/index.html
+ansible localhost -m service -a"name=httpd state=started"
+vi second.html
+ansible localhost -m copy -a"src=second.html dest=/var/www/html"
+ansible localhost -m yum -a"name=git state=installed"
+rpm -qa | grep -i git
+ansible localhost -m git -a"repo=https://github.com/scmgalaxy/ansible-role-template dest=/opt/ansible_repo"
+ansible localhost -m reboot
+ansible localhost -m shell -a"reboot"
+ansible localhost -m file -a"path=/opt/devopsschool.txt name=devopsschool.txt state=touch"
+ansible localhost -m file -a"path=/opt/devopsschool2.txt state=touch mode=u=rw,g=r,o=r"
+ansible localhost -m file -a"path=/opt/devopsschool2.txt state=absent"
+ansible localhost -m file -a"path=/opt/devopsschool.txt state=absent"
