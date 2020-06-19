@@ -1,0 +1,30 @@
+  23  ansible localhost -m group -a"name=deploy state=present""
+   24  ansible localhost -m group -a"name=deploy state=present"
+   25  more /etc/group | grep deploy
+   26  ansible localhost -m user -a"name=deploy-user shell=/bin/bash"
+   27  more /etc/passwd | grep deploy
+   28  ps -ef| grep http
+   29  vi /var/www/html/second.html
+   30  rm /var/www/html/second.html
+   31  vi second.html
+   32  ansible localhost -m copy -a"src=second.html dest=/var/www/html"
+   33  ansible localhost -m yum -a"name=git state=installed"
+   34  ansible localhost -m yum -a"name=wget state=installed"
+   35  which git
+   36  which wger
+   37  which wget
+   38  ansible localhost -m git -a"repo=https://github.com/scmgalaxy/ansible-role-template clone=yes"
+   39  ansible localhost -m git -a"repo=https://github.com/scmgalaxy/ansible-role-template dest=/etc/ansible clone=yes"
+   40  ansible localhost -m git -a"repo=https://github.com/scmgalaxy/ansible-role-template dest=/etc/ansible/scmgalaxy clone=yes"
+   41  ls /etc/ansiuble/scmgalaxy
+   42  ls /etc/ansible/scmgalaxy
+   43  ansible localhost -m reboot
+   44  ansible localhost -m reboot -a"name=reboot"
+   45  ansible localhost -m reboot -a"name=reboot state=true"
+   46  ansible localhost -m reboot
+   47  ansible localhost -a"/sbin/reboot"
+   48  cat .history
+   49  ls
+   50  ls -al
+   51  cat .bash_history
+   52  history
