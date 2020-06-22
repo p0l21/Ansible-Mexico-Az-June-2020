@@ -1,0 +1,15 @@
+all:
+    hosts:
+        webservers:
+            ansible_host: 
+                - foo.example.com
+                - bar.example.com
+        dbservers:
+            - one.example.com
+            - two.example.com
+            - three.example.com
+    children:
+        group_gog:
+            hosts:
+                - webservers
+                - dbservers
