@@ -325,6 +325,222 @@ https://docs.ansible.com/ansible/latest/user_guide/intro_inventory.html#list-of-
 
 Assignment - https://www.devopsschool.com/blog/ansible-playbook-lab-excercise-part-2/
 
+================================================================================================
+What about if we have multiple playbook?
+=========================================
+- Multiple Playbook
+- Multiple TASKS File.
+https://www.devopsschool.com/blog/ansible-include-scnario-with-list-of-plays-or-tasks/
+
+- hosts: all
+  tasks:
+    - debug:
+        msg: task1
+
+    - name: Include task list in play
+      include: stuff.yaml
+
+------stuff.yaml------------
+---
+- name: http service state
+  service: name=httpd state=started enabled=yes
+
+
+------main.yaml------------
+- hosts: all
+  tasks:
+    - debug:
+        msg: task1
+
+- include: stuff.yaml
+
+
+------stuff.yaml------------
+---
+- hosts: web
+  tasks:
+    - debug:
+        msg: task1
+    - name: http service state
+      service: name=httpd state=started enabled=yes
+
+
+
+---
+- name: This sets up an httpd webserver
+  hosts: web
+  tasks:
+  - name: Install the httpd apps
+    yum: name=httpd state=present
+  - name: start the httpd service
+    service: name=httpd state=started
+...
+
+---
+- name: This sets up an httpd webserver
+  hosts: web
+  tasks:
+  - name: create a empty fle
+    file: dest=/opt/test.txt state=touch
+  - name: copy a file
+    copy: dest=/var/www/html/ src="index.html"
+...
+
+- include: play1.yaml
+- include: play2.yaml
+
+
+task.yaml
+  - name: create a empty fle
+    file: dest=/opt/test.txt state=touch
+  - name: copy a file
+    copy: dest=/var/www/html/ src="index.html"
+=======================================================================
+=======================================================================
+What is Variable?
+--------------------------
+	varaible is holder for values which can be reused multiple places....
+	-------------------------
+
+https://www.devopsschool.com/tutorial/ansible/variables/index.html
+
+
+---
+- name: This sets up an httpd webserver
+  hosts: web
+  vars:
+    name: "rajesh kumar"
+    message: "Hello everyone"
+    package: httpd
+  vars_files:
+    - vars.yaml
+
+  tasks:
+  - name: Install the httpd apps
+    yum: name={{ package }} state=present
+  - name: start the httpd service
+    service: name={{ package }} state=started
+  - name: create a empty fle
+    file: dest=/opt/test.txt state=touch
+  - name: copy a file
+    copy: dest=/var/www/html/ src="index.html"
+  - debug:
+      msg: My Name is {{ name }}  and my message is {{ message }}
+...
+
+
+---
+- name: This sets up an httpd webserver
+  hosts: web
+  vars:
+    name: "rajesh kumar"
+    message: "Hello everyone"
+    package: httpd
+  vars_files:
+    - vars.yaml
+  vars_prompt:
+    - name: "Version"
+      prompt: "Which version Do you want to install?"
+
+  tasks:
+  - name: Install the httpd apps
+    yum: name={{ package }} state=present
+  - name: start the httpd service
+    service: name={{ package }} state=started
+  - name: create a empty fle
+    file: dest=/opt/test.txt state=touch
+  - name: copy a file
+    copy: dest=/var/www/html/ src="index.html"
+  - debug:
+      msg: My Name is {{ name }}  and my message is {{ message }}
+  - debug:
+      msg: Prompt message is {{ Version }}
+...
+
+
+---
+- name: This sets up an httpd webserver
+  hosts: web
+  vars:
+    name: "rajesh kumar"
+    message: "Hello everyone"
+    package: httpd
+  vars_files:
+    - vars.yaml
+  vars_prompt:
+    - name: "Version"
+      prompt: "Which version Do you want to install?"
+
+  tasks:
+  - name: include default step variables
+    include_vars: vars-tasks.yaml
+  - name: Install the httpd apps
+    yum: name={{ package }} state=present
+  - name: start the httpd service
+    service: name={{ package }} state=started
+  - name: create a empty fle
+    file: dest=/opt/test.txt state=touch
+  - name: copy a file
+    copy: dest=/var/www/html/ src="index.html"
+  - debug:
+      msg: My Name is {{ name }}  and my message is {{ message }}
+  - debug:
+      msg: Prompt message is {{ Version }}
+  - name: Ansible register variable basic example
+    shell: "find *.txt"
+    args:
+      chdir: "/root/Ansible-Mexico-Az-June-2020/rajeshkumar/vars"
+    register: find_output
+  - debug:
+      msg: Prompt message is {{ find_output }}
+
+...
+
+
+
+Register
+https://www.devopsschool.com/blog/use-of-runtime-variables-to-save-into-another-variable-using-register-in-ansible/
+
+
+---
+- name: This sets up an httpd webserver
+  hosts: localhost
+  vars:
+    name: "rajesh kumar"
+    message: "Hello everyone"
+    package: httpd
+  vars_files:
+    - vars.yaml
+  vars_prompt:
+    - name: "Version"
+      prompt: "Which version Do you want to install?"
+
+  tasks:
+  - name: include default step variables
+    include_vars: vars-tasks.yaml
+  - name: Install the httpd apps
+    yum: name={{ package }} state=present
+  - name: start the httpd service
+    service: name={{ package }} state=started
+  - name: create a empty fle
+    file: dest=/opt/test.txt state=touch
+  - name: copy a file
+    copy: dest=/var/www/html/ src="index.html"
+  - debug:
+      msg: My Name is {{ name }}  and my message is {{ message }}
+  - debug:
+      msg: Prompt message is {{ Version }}
+  - name: Ansible register variable basic example
+    shell: "find *.txt"
+    args:
+      chdir: "/root/Ansible-Mexico-Az-June-2020/rajeshkumar/vars"
+    register: find_output
+  - debug:
+      msg: Prompt message is {{ find_output }}
+...	
+
+
+
 
 
 
