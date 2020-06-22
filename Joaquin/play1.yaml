@@ -1,0 +1,25 @@
+---
+- name: This sets up an httpd webserver
+  hosts: http
+  tasks:
+  - name: greate group
+    group: name=deploy state=present
+  - name: create user
+    user: name=deploy-user group=deploy createhome=yes
+  - name: copy a file
+    copy: dest=/var/www/html/ src="index.html"
+  - name: Install the httpd apps
+    yum: name=httpd state=present
+  - name: start the httpd service
+    service: name=httpd state=started
+  - name: enable the httpd service
+    service: name=httpd enabled=yes
+  - name: Install the wget apps
+    yum: name=wget state=present
+  - name: Install the git apps
+    yum: name=git state=present
+  - name: copy a file
+    git: repo=https://github.com/scmgalaxy/ansible-role-template dest=/root/joaquin
+  - name: reboot the server
+    reboot:
+...
