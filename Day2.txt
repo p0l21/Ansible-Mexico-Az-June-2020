@@ -1,0 +1,199 @@
+How to connect from ACS to ARS?
+===================================
+LINUX TO LINUX
+	---- SSH
+======================================================
+
+
+ACS				ARS
+- Authentication 
+				IP + USER NAME + PASSWORD
+				IP + USER NAME + KEY
+- Authrization 
+				SUDO - Without a password.
+				SUDO - With a Passoword
+				Sudo - 
+					DIFF USER and PASS
+=======================================================
+13.234.21.217
+ec2-user
+
+ARS
+13.233.80.192
+13.235.73.93
+
+Ansible - 
+- optional arguments	
+- Connection Options	aka Authentication
+- Privilege Escalation Options aka Authrization
+
+- Authentication 
+				IP + USER NAME + PASSWORD
+				 	-u 	-k
+				IP + USER NAME + KEY
+					-u 	--key-file
+
+- Authorization 
+				SUDO - Without a password.	-b
+				SUDO - With a Passoword		-b -K
+				Sudo - DIFF USER and PASS	-b -K --become-user
+================================================================================
+ansible localhost -m yum -a"name=httpd state=installed"
+ansible localhost -m copy -a"src=index.html dest=/var/www/html"
+ansible localhost -m service -a"name=httpd state=started"
+
+
+
+-i INVENTORY
+================================
+What is INVENTORY
+	LIST of ipaddress.
+		- Can be on command line	DONE
+		- can be in file[INI]		DONE
+		- can be script
+	It has GROUP		DONE
+	It has BEHAVIOURALS Parameters.
+	It has vars.
+	It has GROUP of GROUP
+
+ansible -i 13.233.80.192, -m yum -a"name=httpd state=installed" -u ec2-user --key-file=remote.pem 
+ansible -i 13.233.80.192, -m copy -a"src=index.html dest=/var/www/html" -u ec2-user --key-file=remote.pem
+ansible -i 13.233.80.192, -m service -a"name=httpd state=started" -u ec2-user --key-file=remote.pem
+
+What is GROUP?
+==================
+GROUP is collection of Server ipadd or hostname insite a inventory. Its subset of all servers in inventory
+- ALL		[Defatul]
+- NO GROUP	[Defatul]
+- CUSTOM
+
+
+
+
+ansible all -i 13.233.80.192, -m yum -a"name=httpd state=installed" -u ec2-user --key-file=remote.pem -b 
+ansible all -i 13.233.80.192, -m copy -a"src=index.html dest=/var/www/html" -u ec2-user --key-file=remote.pem -b
+ansible all -i 13.233.80.192, -m service -a"name=httpd state=started" -u ec2-user --key-file=remote.pem -b
+
+===LAST MODULE WOULD TAKE
+ansible all -i 13.233.80.192, -m yum -a"name=httpd state=installed" -m copy -a"src=index.html dest=/var/www/html" -u ec2-user --key-file=remote.pem -b 
+
+
+ansible all -i 13.233.80.192,13.235.73.93,13.234.21.217, -m yum -a"name=httpd state=installed" -u ec2-user --key-file=remote.pem -b 
+ansible all -i 13.233.80.192,13.235.73.93,13.234.21.217, -m copy -a"src=index.html dest=/var/www/html" -u ec2-user --key-file=remote.pem -b
+ansible all -i 13.233.80.192,13.235.73.93,13.234.21.217, -m service -a"name=httpd state=started" -u ec2-user --key-file=remote.pem -b
+
+----------pROBLEM------------	
+ansible all -i 13.233.80.192,13.235.73.93,13.234.21.217,13.233.80.192,13.235.73.93,13.234.21.217,13.233.80.192,13.235.73.93,13.234.21.217,13.233.80.192,13.235.73.93,13.234.21.217,13.233.80.192,13.235.73.93,13.234.21.217,13.233.80.192,13.235.73.93,13.234.21.217,13.233.80.192,13.235.73.93,13.234.21.217,13.233.80.192,13.235.73.93,13.234.21.217,13.233.80.192,13.235.73.93,13.234.21.217,13.233.80.192,13.235.73.93,13.234.21.217,13.233.80.192,13.235.73.93,13.234.21.217, -m yum -a"name=httpd state=installed" -u ec2-user --key-file=remote.pem -b 
+
+
+ansible all -i 13.233.80.192,13.235.73.93,13.234.21.217, -m copy -a"src=index.html dest=/var/www/html" -u ec2-user --key-file=remote.pem -b
+ansible all -i 13.233.80.192,13.235.73.93,13.234.21.217, -m service -a"name=httpd state=started" -u ec2-user --key-file=remote.pem -b
+
+[root@ip-172-31-12-16 ~]# more inventory
+13.233.80.192
+13.235.73.93
+13.234.21.217
+
+
+-----------------------
+solution
+
+ansible all -i inventory -m yum -a"name=httpd state=installed" -u ec2-user --key-file=remote.pem -b 
+ansible all -i inventory -m copy -a"src=index.html dest=/var/www/html" -u ec2-user --key-file=remote.pem -b
+ansible all -i inventory -m service -a"name=httpd state=started" -u ec2-user --key-file=remote.pem -b
+
+
+---------------------
+inventory may have custom group
+=========================
+- CUSTOM
+
+[root@ip-172-31-12-16 ~]# more inventory
+
+[web]
+13.233.80.192
+13.235.73.93
+
+
+[app]
+13.234.21.217
+
+[db]
+4.5.6.6
+4.5.6.7
+4.5.6.8
+4.5.6.9
+
+ansible web -i inventory -m yum -a"name=httpd state=installed" -u ec2-user --key-file=remote.pem -b 
+ansible web -i inventory -m copy -a"src=index.html dest=/var/www/html" -u ec2-user --key-file=remote.pem -b
+ansible web -i inventory -m service -a"name=httpd state=started" -u ec2-user --key-file=remote.pem -b
+
+ansible web,app -i inventory -m yum -a"name=httpd state=installed" -u ec2-user --key-file=remote.pem -b 
+ansible web,app -i inventory -m copy -a"src=index.html dest=/var/www/html" -u ec2-user --key-file=remote.pem -b
+ansible web,app -i inventory -m service -a"name=httpd state=started" -u ec2-user --key-file=remote.pem -b
+
+
+[root@ip-172-31-12-16 ~]# more inventory
+
+[web]
+13.233.80.192
+13.235.73.93
+
+[gog:children]
+web
+app
+
+[app]
+13.234.21.217
+
+[db]
+4.5.6.6
+4.5.6.7
+4.5.6.8
+4.5.6.9
+
+ansible gog -i inventory -m yum -a"name=httpd state=installed" -u ec2-user --key-file=remote.pem -b 
+ansible gog -i inventory -m copy -a"src=index.html dest=/var/www/html" -u ec2-user --key-file=remote.pem -b
+ansible gog -i inventory -m service -a"name=httpd state=started" -u ec2-user --key-file=remote.pem -b
+
+Assingment - 
+https://www.devopsschool.com/blog/ansible-inventory-lab-excercise-part-1/
+
+ACS
+13.234.21.217
+================
+ec2-user
+
+
+=====ARS==================
+Selene Gomez	35.154.3.253
+jose alfredo jimenez	35.154.232.86
+Ted Tansill	13.233.80.192
+Jorge Luis PeÃ±uelas Montoya	15.206.195.16
+Ruben Omar Ruiz Madrigal	13.233.118.117
+Carlos Mercado Lara	13.127.114.165
+Francisco Javier GarcÃ­a GarcÃ­a	13.233.160.138
+Aguilar, Oswaldo	13.233.154.52
+Jesus Rodrigo Aldana Torres	13.232.162.48
+Ana Isabel DurÃ¡n	13.126.245.67
+B ill Zoromski	15.206.149.87
+Jorge Barrios	13.127.73.149
+Joaquin Hernandez Sandoval	13.126.206.132
+Hugo Briones	13.235.73.93
+Jorge Gutierrez	13.232.209.38
+Bill Zoromski	13.233.14.173
+Paul Ponce	52.66.28.8
+Jorge Gonzalez	13.232.152.129
+Maira Gueta	13.127.50.49
+Janeth Ceballos	13.233.139.26
+Ivan Figueroa	15.206.185.57
+Enrique Estrada	13.232.66.44
+Abril Trejo	3.7.69.65
+Aguilar, Oswaldo	15.206.149.87
+
+
+
+
+
+
+
