@@ -1,0 +1,7 @@
+---
+- name: Create a group called Deploy
+  hosts: app
+  tasks:
+  - name: Create the group
+    group: name=deploy state=present
+...

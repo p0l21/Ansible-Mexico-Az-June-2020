@@ -1,0 +1,7 @@
+---        
+- name: Write a Ansible Playbook to reboot a self machine
+  hosts: localhost
+  tasks:
+    - reboot:
+        reboot_timeout: 3600
+...

@@ -1,0 +1,6 @@
+---
+- name: Reboot machine
+  hosts: web
+  tasks:
+  - name: Reboot machine
+    reboot: reboot_timeout=10 msg="Rebooting host"

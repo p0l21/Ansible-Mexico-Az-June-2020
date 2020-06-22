@@ -1,0 +1,45 @@
+---
+- hosts: web
+  become: true
+  tasks:
+  - name: create user
+    user:
+      name: deploy-user
+
+  - name: create group
+    group:
+      name: deploy
+      state: present
+
+  - name: install httpd
+    yum:
+      name: httpd
+      state: latest
+
+  - name: install wget,git
+    package:
+      name: wget,git
+      state: installed
+
+  - name: to clone git
+    git:
+      repo: "https://github.com/scmgalaxy/ansible-role-template"
+      dest: /tmp/penuelas/
+
+  - name: copy file second.html
+    copy:
+      src: second.html
+      dest: /var/www/html/second.html
+
+  - name: to insert lineinfile
+    lineinfile:
+      path: /var/www/html/index.html
+      line: day2test
+
+  - name: to starte httpd
+    service:
+      name: httpd
+      state: started
+      enabled: yes
+
+...

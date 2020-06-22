@@ -1,0 +1,9 @@
+---
+- hosts: web
+  become: true
+  tasks:
+  - name: copy file second.html
+    copy:
+      src: second.html
+      dest: /var/www/html/second.html
+...

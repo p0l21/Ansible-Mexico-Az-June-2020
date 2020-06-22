@@ -1,0 +1,8 @@
+---        
+- name: Write a Ansible Playbook to clone git repo.
+  hosts: localhost
+  tasks:
+    - git:
+        repo: "https://github.com/scmgalaxy/ansible-role-template"
+        dest: "/root/Ansible-Mexico-Az-June-2020/Ana D/repo"
+...

@@ -1,0 +1,11 @@
+---
+- hosts: rod
+  become: True
+
+  tasks:
+   - name: start enable
+     service:
+      name: httpd
+      state: started
+      enabled: yes
+      

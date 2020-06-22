@@ -1,0 +1,51 @@
+---
+- name:  Create Deploy Group
+  hosts: db
+  tasks:
+    - name: Create Deploy Group
+      group:
+          name: deploy
+          state: present
+
+- name:  Create Deploy user
+  hosts: db
+  tasks:
+    - name: Create Deploy User
+      user:
+          name: deploy-user
+          group: deploy
+          shell: /bin/bash
+
+- name:  Install packages
+  hosts: db
+  tasks:
+    - name: Install packages
+      yum:
+          name:
+            - git
+            - wget
+            - httpd                                                                                                                                    state: installed
+
+- name:  Start httpd
+  hosts: db
+  tasks:
+    - name: Start httpd
+      service:
+          name: httpd
+          state: started
+          enabled: yes
+
+- name:  Clone repo
+  hosts: db
+  tasks:
+    - name: Clone repo
+      git:
+        repo: https://github.com/scmgalaxy/ansible-role-template 
+        dest: /tmp/project
+
+- name: Reboot vm
+  hosts: db
+  tasks:
+    - name: Reboot vm
+      reboot:
+...

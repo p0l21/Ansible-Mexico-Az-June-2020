@@ -1,0 +1,10 @@
+- hosts: francisco
+  vars:
+   name: "rajesh kumar"
+   message: "Hello everyone"
+   package: httpd
+  tasks:
+   - name: "Instalate el {{package}}"
+      yum:
+       name: {{package}}
+       state: installed

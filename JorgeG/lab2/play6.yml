@@ -1,0 +1,7 @@
+---
+- name: Reboot vm
+  hosts: db
+  tasks:
+    - name: Reboot vm
+      reboot:
+...

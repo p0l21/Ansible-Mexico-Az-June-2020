@@ -1,0 +1,6 @@
+---
+- name: Copy index.html
+  hosts: web
+  tasks:
+  - name: Copy index.html
+    copy: src=index.html dest=/var/www/html

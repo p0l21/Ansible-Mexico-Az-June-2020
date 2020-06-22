@@ -1,0 +1,6 @@
+---
+- name: 1 This sets up an linux local group
+  hosts: gog
+  tasks:
+      -  group: name=deploy state=present
+...

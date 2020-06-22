@@ -1,0 +1,8 @@
+---
+- hosts: rod
+  become: True
+
+  tasks:
+   - name: reboot
+     reboot:
+      

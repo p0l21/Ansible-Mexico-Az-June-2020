@@ -1,0 +1,5 @@
+- hosts: fco
+  tasks:
+  - name: ensure apache is at the latest version
+    group:
+      name: deploy

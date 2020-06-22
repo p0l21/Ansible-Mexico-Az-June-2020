@@ -1,0 +1,6 @@
+---
+- name: 5 This copy an index file for apache
+  hosts: gog
+  tasks:
+      -  copy: src=index.html dest=/var/www/html
+...

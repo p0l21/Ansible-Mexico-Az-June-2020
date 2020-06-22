@@ -1,0 +1,6 @@
+- hosts: fco
+  tasks:
+  - name: ensure apache is at the latest version
+    file:
+      path: /var/www/html/index.html
+      state: touch

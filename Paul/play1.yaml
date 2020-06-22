@@ -1,0 +1,28 @@
+---
+- name: setup a http webserver
+  hosts: pol
+  tasks:
+  - name: create group deploy
+    group: name=deploy state=present
+  - name: create user deploy-user
+    user: name=deploy-user group=deploy shell=/bin/bash
+  - name: install httpd
+    yum: name=httpd state=installed
+  - name: start http service
+    service: name=httpd state=started
+  - name: copy index.html to html dir
+    copy: src=index.html dest=/var/www/html
+  - name: copy a second file to html dir
+    copy: src=/var/www/html/index.html dest=/var/www/html/second.html
+  - name: install git
+    yum: name=git state=installed
+  - name: install wget
+    yum: name=wget state=installed
+  - name: clone a git repo
+    git: repo=https://github.com/scmgalaxy/ansible-role-template dest=/tmp/ansible-role-temp/
+  - name: create a dummy file
+    file: name=/opt/devopsschool.txt state=touch
+  - name: delete a dummy file
+    file: name=/opt/devopsschool.txt state=absent
+
+

@@ -1,0 +1,5 @@
+- name: reboot machine
+  hosts: web
+  tasks:
+  - name: reboot machine
+    reboot

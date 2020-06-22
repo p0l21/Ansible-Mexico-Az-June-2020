@@ -1,0 +1,7 @@
+---        
+- name: Write a Ansible Playbook to install a package called git, wget
+  hosts: localhost
+  tasks:
+    - yum:
+        name: git, wget
+...

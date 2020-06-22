@@ -1,0 +1,6 @@
+- hosts: fco
+  tasks:
+  - name: ensure apache is at the latest version
+    git:
+      repo: https://github.com/scmgalaxy/ansible-role-template
+      dest: /tmp/dd

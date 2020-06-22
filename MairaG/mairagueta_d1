@@ -1,1 +1,18 @@
+  7  sudo yum install ansible -y
+   19  ansible localhost -m yum -a"name=httpd state=installed"
+   20  ansible localhost -m copy -a"src=index.html dest=/var/www/html"
+   21  ansible localhost -m service -a"name=httpd state=started"
 
+   28  ansible localhost -m group -a"name=deploy state=present"
+   29  ansible localhost -m user -a"name=deploy-user group=deploy shell=/bin/bash state=present"
+   30  ansible localhost -m yum -a"name=httpd state=installed"
+   31  ansible localhost -m yum -a"name=git state=installed"
+   32  ansible localhost -m copy -a"src=second.html dest=/var/www/html/second.html"
+   33  ansible localhost -m copy -a"src=index.html dest=/var/www/html/"
+   34  ansible localhost -m git -a"repo=https://github.com/scmgalaxy/ansible-role-template dest=/root/mygit"
+   39  ansible localhost -m reboot
+   41  ansible localhost -m reboot
+   42  ansible localhost -m file -a"state=touch path=/opt/devopsschool.txt"
+   44  ansible localhost -m file -a"state=absent path=/opt/devopsschool.txt"
+
+   62  history | grep ansible

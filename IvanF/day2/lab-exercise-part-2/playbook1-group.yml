@@ -1,0 +1,5 @@
+- name: create group
+  hosts: web
+  tasks:
+  - name: create a group called deploy
+    group: name=deploy

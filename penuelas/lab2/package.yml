@@ -1,0 +1,9 @@
+---
+- hosts: web
+  become: true
+  tasks:
+  - name: install wget,git
+    package:
+      name: wget,git
+      state: installed
+...

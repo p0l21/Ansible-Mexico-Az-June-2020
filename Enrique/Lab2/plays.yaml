@@ -1,0 +1,14 @@
+---
+- name : create a group
+  hosts: goodhost
+  tasks:
+  - group: name=deploy state=present
+  - user: name=deploy-user shell=/bin/bash groups=deploy
+  - package: name=httpd state=present
+  - service: name=httpd enabled=yes state=started
+  - lineinfile: path=/var/www/html create=yes line=Hello-World
+  - package: name=git state=present
+  - package: name=wget state=present
+  - command: 'git clone https://github.com/scmgalaxy/ansible-role-template'
+  
+...

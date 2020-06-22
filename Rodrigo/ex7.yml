@@ -1,0 +1,13 @@
+---
+- hosts: rod
+  become: True
+
+  tasks:
+   - name: install git
+     yum:
+      name: '{{item}}'
+      state: latest
+     with_items:
+      - git
+      - wget
+      

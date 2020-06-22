@@ -1,0 +1,8 @@
+- name: This is my frist playbook - Day2 Lab 2
+  hosts: all
+  tasks:
+
+  - name: Create a group called deploy
+    group:
+      name: deploy
+      state: present

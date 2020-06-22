@@ -1,0 +1,36 @@
+---
+- name: 9 combine all previous steps into one
+  hosts: gog
+  tasks:
+    - name: 1 This sets up an linux local group
+      group:
+        name=deploy
+        state=present
+    - name: 2 This sets up an linux local user
+      user:
+        name=deploy-user
+        group=deploy state=present
+    - name: 3 This sets up an apache webserver
+      yum:
+        name=httpd
+        state=installed
+    - name: 4 This start an apache webserver
+      service:
+        name=httpd
+        state=started
+    - name: 5 This copy an index file for apache
+      copy:
+        src=index.html
+        dest=/var/www/html
+    - name: 7 install git and wget
+      yum:
+        name=git,wget
+        state=installed
+    - name: 8 This clones a git repo
+      git:
+        repo=https://github.com/scmgalaxy/ansible-role-template
+        dest=/opt/ansible_repo
+
+    - name: 6 This will reboot the vm
+      reboot:
+...

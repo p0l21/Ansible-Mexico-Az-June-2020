@@ -1,0 +1,13 @@
+- name: This installl git and clones a repo Day2 lab2
+  hosts: all
+  tasks:
+  
+  - name: Install git
+    yum:
+      name: git
+      state: installed
+
+  - name: clone git repo. thttps://github.com/scmgalaxy/ansible-role-template 
+    git:
+     name: https://github.com/scmgalaxy/ansible-role-template
+     dest: /root/mygit

@@ -1,0 +1,6 @@
+---
+- name: 6 This will reboot the vm
+  hosts: gog
+  tasks:
+      -  shell: reboot
+...

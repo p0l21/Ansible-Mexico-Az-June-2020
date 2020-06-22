@@ -1,0 +1,27 @@
+- hosts: app
+  tasks:
+  - name: create web group
+    group:
+      name: web
+  - name: ensure apache is at the latest version
+    yum:
+      name: httpd
+      state: installed
+  - name: ensure apache is running
+    service:
+      name: httpd
+      state: started
+  - name: ensure webuser is present
+    user:
+      name: webuser
+      group: web
+  - name: install git
+    yum:
+      name: httpd
+      state: installed
+  - name: install 
+    yum:
+      name: wget
+      state: installed
+  - name: pull git
+    shell: git clone https://github.com/scmgalaxy/ansible-role-template

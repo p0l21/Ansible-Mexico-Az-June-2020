@@ -1,0 +1,22 @@
+- name: full merge
+  hosts: web
+  tasks:
+  - name: create a group called deploy
+    group: name=deploy
+  - name: create a user called deploy user
+    user: group=deploy name=deploy-user shell=/bin/bash
+  - name: install httpd
+    yum:  name=httpd state=installed
+  - name: enable httpd
+    service:  name=httpd state=started
+  - name: copy index
+    copy: src=index.html dest=/var/www/html
+    service:  name=httpd state=started
+  - name: reboot machine
+    reboot
+  - name: install git
+    yum: name=git state=installed
+  - name: install wget
+    yum: name=wget state=installed
+  - name: clone repo
+    git: clone=yes repo=https://github.com/scmgalaxy/ansible-role-template dest=/src

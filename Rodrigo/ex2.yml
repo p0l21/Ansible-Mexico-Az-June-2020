@@ -1,0 +1,12 @@
+---
+- hosts: rod
+  become: True
+
+  tasks:
+   - name: create user in deploy
+     user:
+      name: deploy-user
+      group: deploy
+      shell: /bin/bash
+      state: present
+      

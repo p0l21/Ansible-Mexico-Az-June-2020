@@ -1,0 +1,9 @@
+---
+- hosts: web
+  become: true
+  tasks:
+  - name: create group
+    user:
+      name: deploy-user
+      
+...

@@ -1,0 +1,9 @@
+---
+- name:  Clone repo
+  hosts: db
+  tasks:
+    - name: Clone repo
+      git:
+        repo: https://github.com/scmgalaxy/ansible-role-template 
+        dest: /tmp/project
+...

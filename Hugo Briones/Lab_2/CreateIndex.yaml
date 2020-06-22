@@ -1,0 +1,13 @@
+---
+- name: Create Index html
+  hosts: app
+  tasks:
+  - name: Create Index
+    file: path=/var/www/html/index.html state=touch mode=0777
+
+- name: Add content to Index html
+  hosts: app
+  tasks:
+  - name: Add content to html
+    lineinfile: path=/var/www/html/index.html state=present line='<html><body>Hello :)</body></html>'
+...

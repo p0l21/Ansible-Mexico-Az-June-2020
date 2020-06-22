@@ -1,0 +1,10 @@
+---
+- hosts: web
+  become: true
+  tasks:
+  - name: to insert lineinfile
+    lineinfile:
+      path: /var/www/html/index.html
+      line: day2test
+      
+...

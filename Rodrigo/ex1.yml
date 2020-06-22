@@ -1,0 +1,10 @@
+---
+- hosts: rod
+  become: True
+
+  tasks:
+   - name: create group
+     group:
+      name: deploy
+      state: present
+      

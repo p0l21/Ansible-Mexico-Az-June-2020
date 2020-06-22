@@ -1,0 +1,8 @@
+- name:  Create dummy index
+  hosts: db
+  tasks:
+    - name: Create dummy index
+      lineinfile:
+          path: /var/www/html/index.html
+          line: 'Copyright yomero 2020'
+...

@@ -1,0 +1,6 @@
+---
+- name: 4 This start an apache webserver
+  hosts: gog
+  tasks:
+      -  service: name=httpd state=started
+...

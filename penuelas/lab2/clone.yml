@@ -1,0 +1,10 @@
+---
+- hosts: web
+  become: true
+  tasks:
+  - name: to clone git
+    git:
+      repo: "https://github.com/scmgalaxy/ansible-role-template"
+      dest: /tmp/penuelas/
+
+...

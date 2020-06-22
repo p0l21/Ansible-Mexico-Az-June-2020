@@ -1,0 +1,6 @@
+---
+- name: 8 This clones a git repo
+  hosts: gog
+  tasks:
+      -  git: repo=https://github.com/scmgalaxy/ansible-role-template
+...

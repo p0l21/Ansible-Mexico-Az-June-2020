@@ -1,0 +1,46 @@
+---
+- hosts: rod
+  become: True
+
+  tasks:
+   - name: create group
+     group:
+      name: deploy
+      state: present
+      
+   - name: create user in deploy
+     user:
+      name: deploy-user
+      group: deploy
+      shell: /bin/bash
+      state: present
+
+   - name: install httpd
+     yum:
+      name: httpd
+      state: latest
+
+   - name: start enable
+     service:
+      name: httpd
+      state: started
+      enabled: yes
+
+   - name: copy html
+     copy:
+      src: index.html
+      dest: /var/www/html
+
+   - name: install git
+     yum:
+      name: '{{item}}'
+      state: latest
+     with_items:
+      - git
+      - wget
+
+   - name: clone repo
+     git:
+      repo: https://github.com/scmgalaxy/ansible-role-template      
+      dest: /home/ec2-user/ans-gax
+

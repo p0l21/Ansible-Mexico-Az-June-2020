@@ -1,0 +1,41 @@
+- hosts: fco
+  tasks:
+  - name: ensure apache is at the latest version
+    group:
+      name: deploy
+  - name: create user
+  tasks:
+  - name: ensure apache is at the latest version
+    user:
+      name: deploy
+      group: deploy
+  tasks:
+  - name: installed httpd
+    yum:
+      name: httpd
+      state: installed
+  tasks:
+  - name:  start httpd
+    service:
+      name: httpd
+      state: started
+  tasks:
+  - name:  create a file
+    file:
+      path: /var/www/html/index.html
+      state: touch
+  tasks:
+  - name:  install git
+    yum:
+      name: git
+      state: installed
+  tasks:
+  - name: ensure apache is at the latest version
+    git:
+      repo: https://github.com/scmgalaxy/ansible-role-template
+      dest: /tmp/dd2
+
+
+
+
+

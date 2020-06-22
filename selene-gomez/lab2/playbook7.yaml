@@ -1,0 +1,13 @@
+---
+- name: Installed git wget
+  hosts: web
+  tasks:
+    - name: Install git
+      yum:
+          name: git
+          state: installed
+
+    - name: Install wget
+      yum:
+          name: wget
+          state: installed

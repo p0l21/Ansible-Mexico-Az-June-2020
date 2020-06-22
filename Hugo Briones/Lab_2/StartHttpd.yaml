@@ -1,0 +1,7 @@
+---
+- name: Start httpd service
+  hosts: app
+  tasks:
+  - name: Start httpd
+    service: name=httpd enabled=yes
+...

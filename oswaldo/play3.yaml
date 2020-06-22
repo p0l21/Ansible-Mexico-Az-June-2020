@@ -1,0 +1,6 @@
+---
+- name: 3 This sets up an apache webserver
+  hosts: gog
+  tasks:
+      -  yum: name=httpd state=installed
+...
