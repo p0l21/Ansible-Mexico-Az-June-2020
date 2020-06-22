@@ -1,0 +1,3 @@
+ansible all  -m yum -a "name=httpd state=installed" -u ec2-user --key-file=../remote.pem -b
+ ansible francisco  -m yum -a "name=httpd state=installed" -u ec2-user --key-file=../remote.pem -b
+ 
