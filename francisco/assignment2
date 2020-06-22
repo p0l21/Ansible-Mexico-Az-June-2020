@@ -1,0 +1,84 @@
+ansible-playbook -i inventory deploy.yaml
+- hosts: fco
+  tasks:
+  - name: ensure apache is at the latest version
+    group:
+      name: deploy
+
+ansible-playbook -i inventory user.yaml
+- hosts: fco
+  tasks:
+  - name: ensure apache is at the latest version
+    user:
+      name: deploy
+      group: deploy
+ ansible-playbook -i inventory httpd.yaml
+ - hosts: fco
+  tasks:
+  - name: ensure apache is at the latest version
+    yum:
+      name: httpd
+      state: installed
+ ansible-playbook -i inventory service.httpd
+ - hosts: fco
+  tasks:
+  - name: ensure apache is at the latest version
+    service:
+      name: httpd
+      state: started
+ ansible-playbook -i inventory index.yaml
+ - hosts: fco
+  tasks:
+  - name: ensure apache is at the latest version
+    file:
+      path: /var/www/html/index.html
+      state: touch
+      
+      ansible-playbook -i inventory git.yaml
+      
+      
+   - hosts: fco
+  tasks:
+  - name: ensure apache is at the latest version
+    git:
+      repo: https://github.com/scmgalaxy/ansible-role-template
+      dest: /home/ec2-user
+      
+   All in one
+   - hosts: fco
+  tasks:
+  - name: ensure apache is at the latest version
+    group:
+      name: deploy
+  - name: create user
+  tasks:
+  - name: ensure apache is at the latest version
+    user:
+      name: deploy
+      group: deploy
+  tasks:
+  - name: installed httpd
+    yum:
+      name: httpd
+      state: installed
+  tasks:
+  - name:  start httpd
+    service:
+      name: httpd
+      state: started
+  tasks:
+  - name:  create a file
+    file:
+      path: /var/www/html/index.html
+      state: touch
+  tasks:
+  - name:  install git
+    yum:
+      name: git
+      state: installed
+  tasks:
+  - name: ensure apache is at the latest version
+    git:
+      repo: https://github.com/scmgalaxy/ansible-role-template
+      dest: /tmp/dd2
+
