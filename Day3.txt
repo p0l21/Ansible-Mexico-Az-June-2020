@@ -1,7 +1,10 @@
+=================
+13.127.116.251	ACS
+=================
 13.127.66.161	ARS
 15.206.149.26	ARS
 13.127.135.131	ARS
-13.127.116.251	ACS
+
 =======================================
 - Environment Variables		- DONE
 - fact variables		- DONE
@@ -339,4 +342,10 @@ https://www.devopsschool.com/blog/ansible-variable-lab-excercise-part-1/
 Ansible Playbook Lab & Excercise – Part 3 - 15 mins
 https://www.devopsschool.com/blog/ansible-playbook-lab-excercise-part-3/
 
+=================
+13.127.116.251	ACS
+=================
+13.127.66.161	ARS
+15.206.149.26	ARS
+13.127.135.131	ARS
 
