@@ -1,0 +1,56 @@
+- name: "include pack"
+  import_tasks: web1.yaml
+  when:
+          ansible_facts['os_family'] == "RedHat"
+- name: "inc pack"
+  import_tasks: web2.yaml
+  when:
+          ansible_facts['os_family'] == "Ubuntu"
+
+- name: "lookup some *.txt files"
+  shell: "find  *.conf"
+  args:
+          chdir: /etc
+  register: find_output
+- debug:
+        msg: Dir is {{find_output}}
+        
+        
+---------------------------
+
+
+- hosts: local
+  vars:
+          webserv6: httpd
+          port: 8080
+          id: "elchapo"
+  roles:
+          - role: common
+          
+          
+          - name: template conf file
+  template:
+        src: /home/khgr684/httpd.j2
+        dest: /etc/httpd/conf/httpd.conf
+  notify:
+      - restart httpd
+
+- name: index file
+  template:
+        src: /home/khgr684/index.j2
+        dest: /var/www/html/index.html
+  notify:
+      - restart httpd
+
+- yum:
+        name: "{{webserv6}}"
+        state: present
+- service:
+        name: httpd
+        state: started
+        
+handlers:
+- name: restart httpd
+  service:
+          name: httpd
+          state: restarted
