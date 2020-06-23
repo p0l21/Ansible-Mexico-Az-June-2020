@@ -1,0 +1,76 @@
+inventory file
+[local]
+192.168.56.106 ansible_connection=ssh ansible_user=khgr684 ansible_become=yes
+
+[local:vars]
+web=httpd
+
+play1
+
+- hosts: local
+  tasks:
+          - name: ensure httpd is installed
+            yum:
+                    name: "{{ web }}"
+                    state: present
+                    
+ play2
+ - hosts: local
+  vars:
+          webserv: httpd
+  tasks:
+          - name: ensure httpd is installed
+            yum:
+                    name: "{{ webserv }}"
+                    state: present
+                    
+ 
+ play3
+ - hosts: local
+  vars_files:
+          - ext.yaml
+  tasks:
+          - name: ensure httpd is installed
+            yum:
+                    name: "{{ webserv1 }}"
+                    state: present
+                    
+                    
+  hosts var
+  cat host_vars/192.168.56.106
+webserv3: httpd
+
+play4
+khgr684@MXGDXL2148EFCB4:~$ cat play4.yaml
+- hosts: local
+  tasks:
+          - name: ensure httpd is installed
+            yum:
+                    name: "{{ webserv3 }}"
+                    state: present
+                    
+                  
+ 
+khgr684@MXGDXL2148EFCB4:~$ cat group_vars/local
+webserv4: httpd
+
+
+play5- hosts: local
+  tasks:
+          - name: ensure httpd is installed
+            yum:
+                    name: "{{ webserv4 }}"
+                    state: present
+                    
+play6
+- hosts: local
+  vars_prompt:
+          - name: package
+            prompt: "Which package do you want installed"
+  tasks:
+          - name: ensure httpd is installed
+            yum:
+                    name: "{{ package }}"
+                    state: present
+                    
+                    
