@@ -1,0 +1,65 @@
+- hosts: fco
+  vars:
+   name: "rajesh kumar"
+   message: "Hello everyone"
+   package: httpd
+  tasks:
+   - name: "Installing on rhel"
+     yum:
+      name: httpd
+      state: installed
+      when:
+         ansible_facts['os_family'] == "RHEL"
+  tasks:
+   - name: "Install on Ubuntu"
+     apt:
+      name: apache2
+      state: present
+      when:
+        ansible_facts['os_family'] == "Debian"
+  tasks:
+   - name: Ansible register variable basic example
+     shell: "ls -l /etc/*"
+     register: etcoutput
+   - debug:
+      msg: Prompt message is {{ etcoutput }}
+      
+      
+      
+      - hosts: fco
+  vars_files:
+      - centos.yaml
+  tasks:
+   - name: "Installing on rhel"
+     include_vars: rhel.yaml
+     yum:
+      name: "{{package}}"
+      state: installed
+      when:
+         ansible_facts['os_family'] == "RHEL"
+  tasks:
+   - name: "Install on Ubuntu"
+     yum:
+      name: httpd
+      state: present
+      when:
+        ansible_facts['os_family'] == "CentOS"
+  tasks:
+   - name: "Config"
+     template:
+        src: httpd.conf
+        dest: "{{conf}]"
+     when:
+       ansible_facts['os_family'] == "CentOS"
+
+
+ - include: play1.yaml
+  - include: play2.yaml
+  - include: play3.yaml
+
+
+- hosts: localhost
+  tasks:
+    - name: print something
+      shell: "echo hello"
+

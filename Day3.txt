@@ -1,0 +1,351 @@
+=================
+13.127.116.251	ACS
+=================
+13.127.66.161	ARS
+15.206.149.26	ARS
+13.127.135.131	ARS
+
+=======================================
+- Environment Variables		- DONE
+- fact variables		- DONE
+- Playbook Conditioning		- DONE
+- Playbook Iteration		- DONE
+- Playbook - Running ext scripts. - DONE
+- Playbook - templates		- DONE
+- Playbook - Handlers		- DONE
+- Exception Handling using Block
+-------------------
+Roles
+---------------------------
+===================================================
+Variables in PLAYBOOk
+
+[web]
+13.127.66.161
+15.206.149.26
+13.127.135.131
+
+[web:vars]
+name="--rajesh kumar in inventory--"
+ansible_user=ec2-user 
+ansible_ssh_private_key_file=remote.pem 
+ansible_become=yes 
+
+
+
+---
+- name: This sets up an httpd webserver
+  hosts: web
+  vars:
+    name: "--rajesh kumar in playbook--"
+    message: "Hello everyone"
+    package: httpd
+
+  tasks:
+  - name: Install the httpd apps
+    yum: name={{ package }} state=present
+  - name: start the httpd service
+    service: name={{ package }} state=started
+  - name: create a empty fle
+    file: dest=/opt/test.txt state=touch
+  - name: copy a file
+    copy: dest=/var/www/html/ src="index.html"
+  - debug:
+      msg: My Name is {{ name }}  and my message is {{ message }}
+...	
+
+===========================
+.
+├── group_vars
+│   ├── all
+│   └── web
+├── host_vars
+│   ├── 13.127.66.161
+│   └── 15.206.149.26
+├── index.html
+├── inventory
+├── play1.yaml
+└── remote.pem
+
+=================================
+
+
+
+ansible-playbook play1.yaml -i inventory -e name=rajeshk
+
+================================
+fact variables
+	- SYSTEM vars which is set to ansible_XXXXX
+	- Ansible uses facter to get system info.
+		 ----------------
+			setup
+
+ 1110  ansible localhost -m setup
+ 1111  clear
+ 1112  ansible localhost -m setup | grep -i os
+
+======================================================
+https://www.devopsschool.com/tutorial/ansible/ansible-conditional-programming-playbooks.html
+
+
+      - name: "shut down Debian flavored systems"
+        command: /sbin/shutdown -t now
+        when: ansible_os_family == "Debian"
+
+---
+- name: This sets up an httpd webserver
+  hosts: web
+  vars:
+    name: "--rajesh kumar in playbook--"
+    message: "Hello everyone"
+    package: httpd
+
+  tasks:
+  - name: Install the httpd apps
+    yum: name={{ package }} state=present
+    when: ansible_os_family == "RedHat"
+  - name: Install the httpd apps
+    apt: name={{ package }} state=present
+    when: ansible_os_family == "Debian"
+  - name: start the httpd service
+    service: name={{ package }} state=started
+  - name: create a empty fle
+    file: dest=/opt/test.txt state=touch
+  - name: copy a file
+    copy: dest=/var/www/html/ src="index.html"
+  - debug:
+      msg: My Name is {{ name }}  and my message is {{ message }}
+...	
+
+========================================================
+Playbook Looping Capabilities
+--------------------------------------
+https://www.devopsschool.com/tutorial/ansible/ansible-looping-programming-playbooks.html
+
+- name: Install common software requirements
+  apt: pkg={{ item }} state=installed
+  with_items:
+     - git
+     - ntp
+     - vim
+
+---
+- name: This sets up an httpd webserver
+  hosts: web
+  vars:
+    name: "--rajesh kumar in playbook--"
+    message: "Hello everyone"
+    package: httpd
+
+  tasks:
+  - name: Install the git - ntp - vim apps
+    yum: name={{ item }} state=present
+    with_items:
+      - git
+      - ntp
+      - vim
+    when: ansible_os_family == "RedHat"
+  - name: Install the apache2 apps
+    apt: name={{ package }} state=present
+    when: ansible_os_family == "Debian"
+  - name: start the httpd service
+    service: name={{ package }} state=started
+  - name: create a empty fle
+    file: dest=/opt/test.txt state=touch
+  - name: copy a file
+    copy: dest=/var/www/html/ src="index.html"
+  - debug:
+      msg: My Name is {{ name }}  and my message is {{ message }}
+  - command: echo {{ item }}
+    loop: [ 0, 2, 4, 6, 8, 10 ]
+    when: item > 5
+  - name: Copy file with owner and permissions
+    copy:
+      src: deploy.sh
+      dest: /tmp/
+      mode: '0755'
+  - name: Execute the command in remote shell; stdout goes to the specified file on the remote.
+    shell: /tmp/deploy.sh >> somelog.txt
+
+...	
+
+============================================
+Step 1 - Copy from ACS to ARS with executable permission
+Step 2 - Run in ACR
+
+java
+su -c "yum install java-1.8.0-openjdk" -y
+
+tomcat
+yum install tomcat -y 
+system start tomcat
+
+
+- name: Copy file with owner and permissions
+  copy:
+    src: deploy.sh
+    dest: /tmp/
+    mode: '0755'
+
+- name: Execute the command in remote shell; stdout goes to the specified file on the remote.
+  shell: /tmp/deploy.sh >> somelog.txt
+
+
+===============================================================================
+===============================================================================
+Playbook - templates
+
+
+
+How paython is handling variable embedded in files?
+---- template using jinj2.
+	- file has to be in .j2
+	- template module
+
+- name: Template a file to /etc/files.conf
+  template:
+    src: index.html.j2
+    dest: /var/www/html/index.html
+
+---
+- name: This sets up an httpd webserver
+  hosts: web
+  vars:
+    name: "--rajesh kumar in playbook--"
+    message: "Hello everyone"
+    package: httpd
+    port: 81
+
+  tasks:
+  - name: Install the git - ntp - vim apps
+    yum: name={{ item }} state=present
+    with_items:
+      - git
+      - ntp
+      - vim
+    when: ansible_os_family == "RedHat"
+  - name: Install the apache2 apps
+    apt: name={{ package }} state=present
+    when: ansible_os_family == "Debian"
+  - name: create a empty fle
+    file: dest=/opt/test.txt state=touch
+  - name: copy a file
+    copy: dest=/var/www/html/ src="index.html"
+  - debug:
+      msg: My Name is {{ name }}  and my message is {{ message }}
+  - command: echo {{ item }}
+    loop: [ 0, 2, 4, 6, 8, 10 ]
+    when: item > 5
+  - name: Copy file with owner and permissions
+    copy:
+      src: deploy.sh
+      dest: /tmp/
+      mode: '0755'
+  - name: Execute the command in remote shell; stdout goes to the specified file on the remote.
+    shell: /tmp/deploy.sh >> somelog.txt
+  - name: Template a file to /etc/files.conf
+    template:
+      src: index.html.j2
+      dest: /var/www/html/index.html
+  - name: Template a file to /etc/files.conf
+    template:
+      src: httpd.conf.j2
+      dest: /etc/httpd/conf/httpd.conf
+    notify:
+    - start the httpd service
+  - name: start the httpd service
+    service: name={{ package }} state=started
+
+  handlers:
+  - name: restart the httpd service
+    service: name={{ package }} state=restarted
+...	
+
+
+============================================
+- Playbook - Handlers
+========================================================
+	- its a tasks but special tasks.
+	- It execute only and only when 
+		- You call it using notify
+		- Calling tasks is having changed true.
+
+Error Handling In Playbooks
+https://docs.ansible.com/ansible/latest/user_guide/playbooks_error_handling.html
+
+
+- name: Fail task when the command error output prints FAILED
+  command: /usr/bin/example-command -x -y -z
+  register: command_result
+  failed_when: "'FAILED' in command_result.stderr"
+
+======================
+- name: this will not be counted as a failure
+  command: /bin/false
+  ignore_errors: yes
+
+====================================
+---
+- name: This sets up an httpd webserver
+  hosts: localhost
+  tasks:
+  - name: Handle the error
+    block:
+      - debug:
+          msg: 'I execute normally'
+      - name: i force a failure
+        command: /bin/false
+      - debug:
+          msg: 'I never execute, due to the above task failing, :-('
+    rescue:
+      - debug:
+          msg: 'I caught an error, can do stuff here to fix it, :-)'
+
+---
+- name: This sets up an httpd webserver
+  hosts: localhost
+  tasks:
+  - name: Handle the error
+    block:
+      - debug:
+          msg: 'I execute normally'
+      - name: i force a failure
+        command: /bin/false
+      - debug:
+          msg: 'I never execute, due to the above task failing, :-('
+    always:
+      - debug:
+          msg: "This always executes, :-)"
+
+
+
+ - name: Always do X
+   block:
+     - debug:
+         msg: 'I execute normally'
+     - name: i force a failure
+       command: /bin/false
+     - debug:
+         msg: 'I never execute :-('
+   always:
+     - debug:
+         msg: "This always executes, :-)"
+==========================================================
+Assignment - 
+
+Ansible Variable Lab & Excercise – Part 2 - 15 mins
+https://www.devopsschool.com/blog/ansible-variable-lab-excercise-part-2/
+
+Ansible Variable Lab & Excercise – Part 1 - 15 mins
+https://www.devopsschool.com/blog/ansible-variable-lab-excercise-part-1/
+
+Ansible Playbook Lab & Excercise – Part 3 - 15 mins
+https://www.devopsschool.com/blog/ansible-playbook-lab-excercise-part-3/
+
+=================
+13.127.116.251	ACS
+=================
+13.127.66.161	ARS
+15.206.149.26	ARS
+13.127.135.131	ARS
+
