@@ -1,0 +1,10 @@
+---
+- name: debugs
+  hosts: web
+  tasks:
+  - name: This is the content of /etc/
+    shell: ls -lthr /etc/
+    register: content
+  - debug:
+      msg: This is a directory {{content}}
+...

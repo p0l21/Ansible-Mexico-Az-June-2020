@@ -1,0 +1,32 @@
+---
+- name: This sets up an httpd webserver
+  hosts: web
+  vars:
+    name: "--pol in playbook--"
+    message: "Hello everyone"
+    package: httpd
+
+  tasks:
+  - name: install httpd
+    yum:
+      name: "{{ package }}"
+      state: present
+    when:
+      - ansible_os_family == "RedHat"
+  - name: install httpd
+    yum:
+      name: "{{ package }}"
+      state: present
+    when:
+      - ansible_os_family == "Ubuntu" 
+  - name: start service
+    service:
+      name: "{{ package }}"
+      state: started
+  - name: copy file
+    copy:
+      src: index.html
+      dest: /var/www/html/
+  - debug:
+      msg: my name is {{ name }} testing {{ message }}
+...

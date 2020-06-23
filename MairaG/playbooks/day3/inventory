@@ -1,0 +1,9 @@
+[web]
+13.127.66.161 
+
+[web:vars]
+name=Yoda
+message=HOLA
+ansible_user=ec2-user 
+ansible_ssh_private_key_file=remote.pem 
+ansible_become=yes 

@@ -1,0 +1,7 @@
+--- 
+- name: These are variables
+  hosts: all
+  vars:
+    var1: "This is Var # 1"
+    var2: "This is Var # 2"
+...

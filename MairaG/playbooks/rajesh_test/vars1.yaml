@@ -13,8 +13,6 @@
     service: name={{ package }} state=started
   - name: create a empty fle
     file: dest=/opt/test.txt state=touch
-  - name: copy a file
-    copy: dest=/var/www/html/ src="index.html"
   - debug:
       msg: My Name is {{ myname }}  and my message is {{ message }}
 ...

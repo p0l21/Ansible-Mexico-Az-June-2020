@@ -1,0 +1,17 @@
+---
+- name: This sets up an httpd webserver
+  hosts: localhost
+  tasks:
+  - name: Handle the error
+    block:
+      - debug:
+          msg: 'I execute normally'
+      - name: i force a failure
+        command: /bin/false
+      - debug:
+          msg: 'I never execute, due to the above task failing, :-('
+    always:
+      - debug:
+          msg: "This always executes, :-)"
+
+

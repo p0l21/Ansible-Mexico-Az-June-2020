@@ -2,6 +2,7 @@
 13.233.160.138 ansible_connection=ssh aunsible_user=ec2-user ansible_ssh_private_key_file=remote.pem ansible_become=yes
 
 [app]
+13.127.135.131
 13.232.152.129 
 
 [app:vars]

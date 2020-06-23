@@ -32,5 +32,5 @@
       chdir: "/root/Ansible-Mexico-Az-June-2020/rajeshkumar/vars"
     register: find_output
   - debug:
-      msg: Prompt message is {{ find_output }}
+      msg: Prompt message is {{ find_output.stdout }}
 ...

@@ -1,0 +1,156 @@
+---
+- name: Day2
+  hosts: Janeth
+  tasks:
+  - name: 1. Write a Ansible Playbook to create a group called “deploy”
+    group:
+      name: deploy
+      state: present
+...
+
+---
+- name: Day2
+  hosts: Janeth
+  tasks:
+  - name: 2. Write a Ansible Playbook to create a user called “deploy-user” which is part of group called “deploy” and with /bin/bash shell.
+    user:
+      name: deploy-user
+      shell: /bin/bash
+      groups: deploy
+      append: yes
+...
+
+---
+- name: Day2
+  hosts: Janeth
+  tasks:
+  - name: 3. Write a Ansible Playbook to install package named “httpd” in RHEL/centos.
+    yum:
+      name: httpd
+      state: latest
+...
+
+---
+- name: Day2
+  hosts: Janeth
+  tasks:
+  - name: 4. Write a Ansible Playbook to start a service named “httpd”
+    service:
+      name: httpd
+      state: started
+...
+
+---
+- name: Day2
+  hosts: Janeth
+  tasks:
+  - name: 4. Write a Ansible Playbook to enable the service named “httpd”
+    service:
+      name: httpd
+      enabled: yes
+...
+
+---
+- name: Day2
+  hosts: Janeth
+  tasks:
+  - name: 5. Write a Ansible Playbook to create a file called “index.html” in /var/www/html with some dummy html contents.
+    copy:
+      src: "index.html"
+      dest: /var/www/html
+...
+
+---
+- name: Day2
+  hosts: Janeth
+  tasks:
+  - name: 6. Write a Ansible Playbook to reboot a self machine.
+    reboot:
+...
+
+---
+- name: Day2
+  hosts: Janeth
+  tasks:
+  - name: 7. Write a Ansible Playbook to install a package called “git”, “wget”.
+    yum:
+      name: 
+        - git
+        - wget
+      state: latest     
+...
+
+---
+- name: Day2
+  hosts: Janeth
+  tasks:
+  - name: 8. Write a Ansible Playbook to clone git repo. https://github.com/scmgalaxy/ansible-role-template
+    git:
+      repo: https://github.com/scmgalaxy/ansible-role-template
+      version: master
+      dest: /home/ec2-user/ans-gax
+      accept_hostkey: yes
+...
+
+
+============================================================================================================
+
+
+---
+- name: Day2
+  hosts: Janeth
+  become: yes
+  
+  tasks:
+
+  - name: 1. Write a Ansible Playbook to create a group called “deploy”
+    group:
+      name: deploy
+      state: present
+
+  - name: 2. Write a Ansible Playbook to create a user called “deploy-user” which is part of group called “deploy” and with /bin/bash shell.
+    user:
+      name: deploy-user
+      shell: /bin/bash
+      groups: deploy
+      append: yes
+
+  - name: 3. Write a Ansible Playbook to install package named “httpd” in RHEL/centos.
+    yum:
+      name: httpd
+      state: latest
+
+  - name: 4. Write a Ansible Playbook to start a service named “httpd”
+    service:
+      name: httpd
+      state: started
+
+  - name: 4. Write a Ansible Playbook to enable the service named “httpd”
+    service:
+      name: httpd
+      enabled: yes
+
+  - name: 5. Write a Ansible Playbook to create a file called “index.html” in /var/www/html with some dummy html contents.
+    copy:
+      src: "index.html"
+      dest: /var/www/html
+
+  - name: 6. Write a Ansible Playbook to reboot a self machine.
+    reboot:
+
+  - name: 7. Write a Ansible Playbook to install a package called “git”, “wget”.
+    yum:
+      name: 
+        - git
+        - wget
+      state: latest
+
+  - name: 8. Write a Ansible Playbook to clone git repo. thttps://github.com/scmgalaxy/ansible-role-template
+    git:
+      repo: https://github.com/scmgalaxy/ansible-role-template
+      version: master
+      dest: /home/ec2-user/ans-gax
+      accept_hostkey: yes
+...
+
+

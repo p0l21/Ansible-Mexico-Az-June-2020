@@ -1,0 +1,21 @@
+---
+- name: This sets up an httpd webserver
+  hosts: web
+
+  tasks:
+  - name: include_var_file
+    include_vars:
+      var_file.yml
+  - name: Install httpd apps
+    yum:
+      name: "{{var_file}}"
+      state: present
+
+  - name: Part2 assigment3
+    shell:
+      cmd: ls -lthr
+    register: find
+    debug:
+       msg: 'find'
+      
+...

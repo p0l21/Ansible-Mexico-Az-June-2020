@@ -1,0 +1,18 @@
+---
+- name: This sets up an httpd webserver
+  hosts: web
+  vars_files:
+    - vars.yaml
+  vars:
+    package: httpd
+  vars_prompt:
+    - name: "Version"
+      prompt: "Which version do you want to install?"
+
+  tasks:
+  - name: Install web service
+    yum: name={{ package }} state=installed
+    when: ansible_os_family == "RedHat"
+  - debug:
+      msg: Prompt message is {{ Version }}
+...

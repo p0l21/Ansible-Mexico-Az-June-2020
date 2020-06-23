@@ -1,0 +1,9 @@
+---
+- name:  Demo
+  hosts: all
+  tasks:
+    - name: Install {{ inv_service }}
+      yum:
+          name: "{{ inv_service }}"
+          state: installed
+...

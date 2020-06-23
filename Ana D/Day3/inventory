@@ -1,0 +1,11 @@
+[web]
+13.127.66.161
+15.206.149.26
+13.127.135.131
+
+[web:vars]
+name="--Ana from inventory--"
+ansible_user=ec2-user 
+ansible_ssh_private_key_file=remote.pem 
+ansible_become=yes
+package=httpd

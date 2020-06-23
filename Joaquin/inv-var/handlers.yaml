@@ -1,0 +1,53 @@
+---
+- name: This sets up an httpd webserver
+  hosts: web
+  vars:
+    name: "--rajesh kumar in playbook--"
+    message: "Hello everyone"
+    package: httpd
+    port: 81
+
+  tasks:
+  - name: Install the git - ntp - vim apps
+    yum: name={{ item }} state=present
+    with_items:
+      - git
+      - ntp
+      - vim
+    when: ansible_os_family == "RedHat"
+  - name: Install the apache2 apps
+    apt: name={{ package }} state=present
+    when: ansible_os_family == "Debian"
+  - name: create a empty fle
+    file: dest=/opt/test.txt state=touch
+  - name: copy a file
+    copy: dest=/var/www/html/ src="index.html"
+  - debug:
+      msg: My Name is {{ name }}  and my message is {{ message }}
+  - command: echo {{ item }}
+    loop: [ 0, 2, 4, 6, 8, 10 ]
+    when: item > 5
+  - name: Copy file with owner and permissions
+    copy:
+      src: deploy.sh
+      dest: /tmp/
+      mode: '0755'
+  - name: Execute the command in remote shell; stdout goes to the specified file on the remote.
+    shell: /tmp/deploy.sh >> somelog.txt
+  - name: Template a file to /etc/files.conf
+    template:
+      src: index.html.j2
+      dest: /var/www/html/index.html
+  - name: Template a file to /etc/files.conf
+    template:
+      src: httpd.conf.j2
+      dest: /etc/httpd/conf/httpd.conf
+    notify:
+    - restart the httpd service
+  - name: start the httpd service
+    service: name={{ package }} state=started
+
+  handlers:
+  - name: restart the httpd service
+    service: name={{ package }} state=restarted
+...	

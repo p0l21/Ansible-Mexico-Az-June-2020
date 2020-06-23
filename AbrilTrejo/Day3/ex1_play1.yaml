@@ -1,0 +1,9 @@
+---
+- name:  Install httpd
+  hosts: web
+  tasks:
+    - name: Install {{ inv_service }}
+      yum:
+          name: "{{ inv_service }}"
+          state: installed
+...

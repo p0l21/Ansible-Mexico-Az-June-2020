@@ -1,0 +1,30 @@
+---
+- name: This sets up an httpd webserver
+  hosts: web
+  vars:
+    name: "rajesh kumar"
+    message: "Hello everyone"
+    package: httpd
+  vars_files:
+    - vars.yaml
+  vars_prompt:
+    - name: "Version"
+      prompt: "Which version Do you want to install?"
+      private: no
+
+  tasks:
+  - name: Install the httpd apps
+    yum: name={{ package }} state=present
+  - name: start the httpd service
+    service: name={{ package }} state=started
+  - name: create a empty fle
+    file: dest=/opt/test.txt state=touch
+  - name: copy a file
+    copy: dest=/var/www/html/ src="index.html"
+  - debug:
+      msg: My Name is {{ name }}  and my message is {{ message }}
+  - debug:
+      msg: Prompt message is {{ Version }}
+...
+
+

@@ -1,0 +1,16 @@
+- name: This sets up an httpd webserver
+  hosts: web
+  tasks:
+  - name: Install the httpd apps
+    yum: name=httpd state=present
+    when: ansible_os_family == "RedHat"
+  - name: Install the apache2 apps
+    apt: name=apache2 state=present
+    when: ansible_os_family == "Debian"
+  - name: list dirs in etc
+    shell: find /etc -type d
+    register: find_output
+  - debug:
+      msg:  Dires under etc are {{ find_output.stdout }}
+...	
+

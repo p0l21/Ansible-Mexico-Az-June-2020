@@ -1,0 +1,15 @@
+---
+- name:  Install httpd
+  hosts: web
+  vars:
+     service: httpd
+  tasks:
+    - name: Install {{ service }}
+      yum:
+          name: "{{ service }}"
+          state: installed
+
+    - name: Set index
+      template:
+        src: my_index.j2
+        dest: /var/www/index.html

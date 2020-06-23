@@ -1,0 +1,14 @@
+---
+- name: This sets up an httpd webserver
+  hosts: web
+
+  tasks:
+  - name: includ evars
+    include_vars:
+      file: external_1.yml
+
+  - name: Install httpd apps
+    yum:
+      name: "{{webserver}}"
+      state: present
+...

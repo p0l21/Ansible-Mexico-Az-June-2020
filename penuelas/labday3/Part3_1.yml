@@ -1,0 +1,25 @@
+---
+- name: This sets up an httpd webserver
+  hosts: web
+
+  tasks:
+  - name: include_var_file
+    yum:
+      name: httpd
+      state: present
+    when: ansible_distribution == "CentOS"
+
+
+  - name: include_var_file
+    yum:
+      name: httpd
+      state: present
+    when: ansible_distribution == "RedHat"
+
+  - name: This is the content of /etc/
+    shell: ls -lthr /etc/
+    register: content
+  - debug:
+      msg: This is a directory {{content}} 
+...
+

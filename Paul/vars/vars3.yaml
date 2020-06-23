@@ -1,0 +1,25 @@
+---
+- name: setun an http webserver
+  hosts: pol
+  vars_files:
+    - vars-file.yaml
+  vars_prompt:
+    - name: "version"
+      prompt: "which version"
+      private: no
+  tasks:
+  - name: install httpd
+    yum:
+      name: "{{ package }}"
+      state: present
+  - name: start service
+    service:
+      name: "{{ package }}"
+      state: started
+  - name: copy file
+    copy:
+      src: index.html
+      dest: /var/www/html/
+  - debug:
+      msg: my name si {{ name }} testing {{ message }} and version to install is {{ version }}
+...

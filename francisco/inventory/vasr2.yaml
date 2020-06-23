@@ -1,0 +1,25 @@
+- hosts: fco
+  vars_files:
+      - centos.yaml
+  tasks:
+   - name: "Installing on rhel"
+     include_vars: rhel.yaml
+     yum:
+      name: "{{package}}"
+      state: installed
+      when: 
+         ansible_facts['os_family'] == "RHEL"
+  tasks:
+   - name: "Install on Ubuntu"
+     yum:
+      name: httpd
+      state: present
+      when: 
+        ansible_facts['os_family'] == "CentOS"
+  tasks:
+   - name: "Config"
+     template:
+        src: httpd.conf
+        dest: "{{conf}]"
+     when:
+       ansible_facts['os_family'] == "CentOS"

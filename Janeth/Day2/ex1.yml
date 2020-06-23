@@ -1,0 +1,9 @@
+---
+- name: Day2
+  hosts: Janeth
+  tasks:
+  - name: 1. Write a Ansible Playbook to create a group called “deploy”
+    group:
+      name: deploy
+      state: present
+...

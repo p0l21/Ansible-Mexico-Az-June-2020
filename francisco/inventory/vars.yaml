@@ -1,10 +1,25 @@
-- hosts: francisco
+- hosts: fco
   vars:
    name: "rajesh kumar"
    message: "Hello everyone"
    package: httpd
   tasks:
-   - name: "Instalate el {{package}}"
-      yum:
-       name: {{package}}
-       state: installed
+   - name: "Installing on rhel"
+     yum:
+      name: httpd
+      state: installed
+      when: 
+         ansible_facts['os_family'] == "RHEL"
+  tasks:
+   - name: "Install on Ubuntu"
+     apt:
+      name: apache2
+      state: present
+      when: 
+        ansible_facts['os_family'] == "Debian"
+  tasks:
+   - name: Ansible register variable basic example
+     shell: "ls -l /etc/*"
+     register: etcoutput
+   - debug:
+      msg: Prompt message is {{ etcoutput }}

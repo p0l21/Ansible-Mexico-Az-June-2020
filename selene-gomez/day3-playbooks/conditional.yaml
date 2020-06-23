@@ -1,0 +1,23 @@
+
+- name: This sets up an httpd webserver
+  hosts: web
+
+  tasks:
+  - name: Install the git - ntp - vim apps
+    yum: name={{ item }} state=present
+    with_items:
+      - git
+      - ntp
+      - vim
+    when: ansible_os_family == "RedHat"
+  - name: Install the apache2 apps
+    apt: name={{ package }} state=present
+    when: ansible_os_family == "Debian"
+  - command: "ls /etc"
+    register: dir_etc
+  - name: start the httpd service
+    service: name={{ package }} state=started
+
+  handlers:
+  - name: restart the httpd service
+    service: name={{ package }} state=restarted

@@ -1,0 +1,7 @@
+---
+- hosts: localhost
+  gather_facts: True
+  become: True
+
+- import_playbook: second.yaml
+- import_playbook: third.yaml

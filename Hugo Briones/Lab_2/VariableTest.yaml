@@ -1,0 +1,15 @@
+---
+- name: This is a var-test play
+  hosts: app
+  vars_files:
+    - Variables.yaml
+  vars: 
+    vari1: var1
+    vari2: var2
+
+  tasks:
+  - name: This tests var1
+    file: path=/opt/devopsschool.txt state=touch mode=0777
+  - debug:
+      msg: Content of Var1 {{ vari1 }} and content of Var2 {{ vari2 }}
+...

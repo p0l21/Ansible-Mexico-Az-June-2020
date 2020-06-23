@@ -1,0 +1,9 @@
+---
+- name: Day2
+  hosts: Janeth
+  tasks:
+  - name: 5. Write a Ansible Playbook to create a file called “index.html” in /var/www/html with some dummy html contents.
+    copy:
+      src: "index.html"
+      dest: /var/www/html
+...

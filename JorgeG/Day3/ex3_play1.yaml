@@ -1,0 +1,25 @@
+---
+- name:  Install httpd
+  hosts: web
+  vars:
+    service: httpd
+    famupper: ansible_os_family
+  tasks:
+    - name: Install {{ service }} on Redhat
+      yum:
+          name: "{{ service }}"
+          state: installed
+      when: ansible_os_family  == "RedHat"
+
+    - name: Install {{ service }} on Debian
+      apt:
+          name: "{{ service }}"
+          state: installed
+      when: ansible_os_family == "Debian"
+    - name: Find  on /etc
+      shell:  find /etc
+      register: find_out
+
+    - debug:
+        msg: "Got in /etc {{ find_out }}"
+...

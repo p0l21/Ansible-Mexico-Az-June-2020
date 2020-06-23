@@ -1,0 +1,20 @@
+---
+- name: Install httpd
+  hosts: web
+  vars:
+    port: 80
+
+  tasks:
+  - name: Install httpd
+    yum:  name={{ package }} state=installed
+    when: ansible_os_family == "RedHat"
+  - name: Copying httpd configuation
+    template:
+      src: httpd.conf.j2
+      dest: /etc/httpd/conf/httpd.conf
+    notify:
+    - ReStart nginx
+  handlers:
+  - name: ReStart nginx
+    service: name={{ package }} state=restarted
+    when: ansible_os_family == "RedHat"

@@ -1,0 +1,9 @@
+---
+- name: Day2
+  hosts: Janeth
+  tasks:
+  - name: 4. Write a Ansible Playbook to enable the service named “httpd”
+    service:
+      name: httpd
+      enabled: yes
+...

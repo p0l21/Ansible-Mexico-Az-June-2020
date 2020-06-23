@@ -1,0 +1,11 @@
+---
+- name:  Install httpd
+  hosts: web
+  vars:
+    service:
+  tasks:
+    - name: Install {{ service }}
+      yum:
+          name: "{{ service }}"
+          state: installed
+...

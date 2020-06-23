@@ -1,0 +1,13 @@
+---
+- name:  Install httpd
+  hosts: web
+  vars_prompt:
+     - name: service
+       prompt: "Input the service name"
+       private: no
+  tasks:
+    - name: Install {{ service }}
+      yum:
+          name: "{{ service }}"
+          state: installed
+...

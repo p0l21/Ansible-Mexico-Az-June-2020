@@ -1,0 +1,32 @@
+---
+- name: setun an http webserver
+  hosts: localhost
+  vars_files:
+    - vars-file.yaml
+  vars_prompt:
+    - name: "version"
+      prompt: "which version"
+      private: no
+  tasks:
+  - name: install httpd
+    yum:
+      name: "{{ package }}"
+      state: present
+  - name: start service
+    service:
+      name: "{{ package }}"
+      state: started
+  - name: copy file
+    copy:
+      src: index.html
+      dest: /var/www/html/
+  - debug:
+      msg: my name si {{ name }} testing {{ message }} and version to install is {{ version }}
+  - name: Ansible register variable
+    shell: "find *.txt"
+    args:
+      chdir: "/root/Ansible-Mexico-Az-June-2020/Paul/vars"
+    register: find_output
+  - debug:
+      msg: Prompt message is {{ find_output }}
+...

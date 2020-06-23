@@ -1,0 +1,11 @@
+---
+- name: Day2
+  hosts: Janeth
+  tasks:
+  - name: 8. Write a Ansible Playbook to clone git repo. https://github.com/scmgalaxy/ansible-role-template
+    git:
+      repo: https://github.com/scmgalaxy/ansible-role-template
+      version: master
+      dest: /home/ec2-user/ans-gax
+      accept_hostkey: yes
+...

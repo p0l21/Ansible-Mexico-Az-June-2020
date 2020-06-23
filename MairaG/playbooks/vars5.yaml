@@ -1,0 +1,28 @@
+---
+- name: This sets up an httpd webserver
+  hosts: localhost
+  vars:
+    name: "MAIRA"
+    message: "Testing v5"
+    package: httpd
+  vars_prompt:
+    - name: "Version"
+      prompt: "Which version Do you want to install?"
+      private: no
+
+  tasks:
+  - name: start the httpd service
+    service: name={{ package }} state=started
+  - debug:
+      msg: My Name is {{ name }}  and my message is {{ message }}
+  - debug:
+      msg: Prompt message is {{ Version }}
+  - name: Ansible register variable basic example
+    shell: "find *.txt"
+    args:
+      chdir: "/root/Ansible-Mexico-Az-June-2020/MairaG/playbooks"
+    register: find_output
+  - debug:
+      msg: Prompt message is {{ find_output.stdout }}
+
+...

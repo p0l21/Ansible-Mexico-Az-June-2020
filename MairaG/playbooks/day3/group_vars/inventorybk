@@ -1,0 +1,11 @@
+[web]
+13.127.66.161 
+[QA]
+15.206.149.26 ansible_user=ec2-user ansible_ssh_private_key_file=remote.pem port=8080 ansible_become=yes
+[DEV]
+13.127.135.131 ansible_user=ec2-user ansible_ssh_private_key_file=remote.pem port=80 ansible_become=yes
+
+[web:vars]
+ansible_user=ec2-user 
+ansible_ssh_private_key_file=remote.pem 
+ansible_become=yes 

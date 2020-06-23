@@ -1,0 +1,7 @@
+---
+- name: Day2
+  hosts: Janeth
+  tasks:
+  - name: 6. Write a Ansible Playbook to reboot a self machine.
+    reboot:
+...

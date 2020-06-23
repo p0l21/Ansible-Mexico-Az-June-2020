@@ -1,0 +1,6 @@
+vars:
+   package: httpd
+   port: 8080
+   conf: /etc/httpd.conf/conf/httpd.conf 
+   
+

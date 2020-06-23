@@ -1,0 +1,5 @@
+vars:
+   package: httpd
+   port: 80
+   
+

@@ -1,0 +1,14 @@
+---
+- name: This sets up an httpd webserver
+  hosts: all
+  vars:
+    myname: "maira gueta"
+    message: "Hello world!!!"
+    package: httpd
+
+  tasks:
+  - name: stop the httpd service
+    service: name={{ package }} state=started
+  - debug:
+      msg: My Name is {{ myname }}  and my message is {{ message }}
+...

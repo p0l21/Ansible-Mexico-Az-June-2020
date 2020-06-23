@@ -1,0 +1,10 @@
+---
+- name: This sets up an httpd webserver
+  hosts: web
+  tasks:
+  - name: create a empty fle
+    file: dest=/opt/test.txt state=touch
+  - name: copy a file
+    copy: dest=/var/www/html/ src="index.html"
+...
+

@@ -1,0 +1,12 @@
+---
+- name: Day2
+  hosts: Janeth
+  tasks:
+  - name: 7. Write a Ansible Playbook to install a package called “git”, “wget”.
+    yum:
+      name: 
+        - git
+        - wget
+      state: latest     
+...
+

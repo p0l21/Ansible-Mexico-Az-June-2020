@@ -1,0 +1,48 @@
+- name: Playbook 1 - Day 2 Lab2 - first playbook
+  hosts: all
+  tasks:
+  
+  - name: Create a group called deploy
+    group: 
+      name: deploy
+      state: present
+ 
+  - name: Create a user called deploy-user group deploy and shell /bin/bash
+    user:
+      name: deploy-user
+      shell: /bin/bash
+      group: deploy
+
+  - name: Install the httpd apps
+    yum: 
+      name: httpd 
+      state: present
+
+  - name: copy a file
+    copy: 
+      dest=/var/www/html/ 
+      src="index.html"
+
+  - name: start the httpd service
+    service: 
+      name: httpd 
+      enabled: yes
+      state: started
+
+  - name: Install wget
+    yum:
+      name: git
+      state: installed
+
+  - name: Install wget
+    yum:
+      name: wget
+      state: installed
+
+  - name: clone git repo. thttps://github.com/scmgalaxy/ansible-role-template 
+    git:
+     name: https://github.com/scmgalaxy/ansible-role-template
+     dest: /root/mygit
+
+  - name: reboot the machine
+    reboot:

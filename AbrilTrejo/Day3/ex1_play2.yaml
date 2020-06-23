@@ -1,0 +1,11 @@
+---
+- name:  Install httpd
+  hosts: web
+  vars:
+    play_service: httpd
+  tasks:
+    - name: Install {{ play_service }}
+      yum:
+          name: "{{ play_service }}"
+          state: installed
+...

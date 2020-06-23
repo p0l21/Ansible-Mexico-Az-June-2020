@@ -1,0 +1,21 @@
+---
+- name: setun an http webserver
+  hosts: pol
+  vars_files:
+    - vars-file.yaml
+  tasks:
+  - name: install httpd
+    yum:
+      name: "{{ package }}"
+      state: present
+  - name: start service
+    service:
+      name: "{{ package }}"
+      state: started
+  - name: copy file
+    copy:
+      src: index.html
+      dest: /var/www/html/
+  - debug:
+      msg: my name si {{ name }} testing {{ message }}
+...

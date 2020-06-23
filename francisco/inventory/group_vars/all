@@ -1,0 +1,6 @@
+hosts:
+    13.127.66.161: 
+    15.206.149.26:
+vars:
+   webserver: httpd
+

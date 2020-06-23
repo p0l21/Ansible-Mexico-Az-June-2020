@@ -1,0 +1,29 @@
+---
+- hosts: rod
+  become: True
+
+  tasks:
+   - name: install httpd 
+     package:
+      name: httpd
+      state: latest
+     when: ansible_os_family == "RedHat" or ansible_os_family == "Debian"
+
+   - name: Find dirs in etc
+     find:
+       paths: /etc
+       file_type: directory
+     register: dirs_found
+
+   - name: print
+     debug:
+      msg: Directories found in "{{ ansible_hostname }}"  are "{{ item.path }}"
+     with_items: "{{ dirs_found }}"
+
+#   - name: Debug files_matched loop
+#     debug:
+#      var: item.path
+#     loop: "{{ files_matched.files|flatten(levels=0) }}"
+#     loop_control:
+#       label: "{{ item.path }}"
+

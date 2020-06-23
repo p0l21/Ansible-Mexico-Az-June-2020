@@ -1,0 +1,46 @@
+---
+- name: This sets up an httpd webserver
+  hosts: web
+  vars:
+    name: "--pol in playbook--"
+    message: "Hello everyone"
+    package: httpd
+
+  tasks:
+  - name: install httpd
+    yum:
+      name: "{{ item }}"
+      state: present
+    with_items:
+      - git
+      - ntp
+      - vim
+    when:
+      - ansible_os_family == "RedHat"
+  - name: install httpd
+    yum:
+      name: "{{ package }}"
+      state: present
+    when:
+      - ansible_os_family == "Ubuntu" 
+  - name: start service
+    service:
+      name: "{{ package }}"
+      state: started
+  - name: copy file
+    copy:
+      src: index.html
+      dest: /var/www/html/
+  - debug:
+      msg: my name is {{ name }} testing {{ message }}
+  - command: echo {{ item }}
+    loop: [ 0, 2, 4, 6, 8, 10 ]
+    when: item > 5
+  - name: Copy file with owner and permissions
+    copy:
+      src: deploy.sh
+      dest: /tmp/
+      mode: '0755'
+  - name: Execute the command in remote shell; stdout goes to the specified file on the remote.
+    shell: /tmp/deploy.sh >> somelog.txt
+...

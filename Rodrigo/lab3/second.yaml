@@ -1,0 +1,11 @@
+---
+- hosts: localhost
+  gather_facts: True
+  become: True
+
+  tasks:
+
+   - name: print
+     debug:
+      msg: This is second
+

@@ -1,0 +1,28 @@
+---
+- name: This sets up an httpd webserver
+  hosts: web
+
+  tasks:
+  - name: Install httpd apps
+    yum:
+      name: "{{adhoc}}"
+      state: present
+...
+
+PLAY [This sets up an httpd webserver] *****************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [13.127.66.161]
+ok: [15.206.149.26]
+ok: [13.127.135.131]
+
+TASK [Install httpd apps] ******************************************************
+ok: [13.127.66.161]
+ok: [13.127.135.131]
+ok: [15.206.149.26]
+
+PLAY RECAP *********************************************************************
+13.127.135.131             : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+13.127.66.161              : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+15.206.149.26              : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
