@@ -5,7 +5,7 @@
     name: "{{ WEB_SERVER_NAME }}"
     state: installed
   when:
-    - ansible_facts['distribution'] == "RHEL"
+    - ansible_facts['distribution'] == "RedHat"
 
 - name: copy index template
   template:

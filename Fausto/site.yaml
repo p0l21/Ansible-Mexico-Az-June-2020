@@ -1,0 +1,5 @@
+---
+- hosts: ARS
+  gather_facts: yes
+  roles:
+    - role: web

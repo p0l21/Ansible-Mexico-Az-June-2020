@@ -1,0 +1,3 @@
+---
+# vars file for web
+WEB_SERVER_NAME: httpd
