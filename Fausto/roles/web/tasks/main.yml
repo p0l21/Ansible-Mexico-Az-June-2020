@@ -1,0 +1,27 @@
+---
+# tasks file for web
+- name: install web server
+  yum:
+    name: "{{ WEB_SERVER_NAME }}"
+    state: installed
+  when:
+    - ansible_facts['distribution'] == "RHEL"
+
+- name: copy index template
+  template:
+    src: index.j2
+    dest: /var/www/html/index.html
+
+- name: copy template conf
+  template:
+    src: httpd.j2
+    dest: /etc/httpd/conf/httpd.conf
+  notify:
+    - restart httpd server
+
+- name: run script
+  shell: bash script.sh
+  register: script_result
+
+- name: pass output script
+  shell: "echo '{{ script_result.stdout }}' >> /var/www/html/index.html" 
