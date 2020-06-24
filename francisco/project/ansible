@@ -1,0 +1,117 @@
+role
+├── mamalon
+│   ├── README.md
+│   ├── defaults
+│   │   └── main.yml
+│   ├── files
+│   ├── handlers
+│   │   └── main.yml
+│   ├── meta
+│   │   └── main.yml
+│   ├── tasks
+│   │   ├── main.yaml
+│   │   ├── main.yml
+│   │   ├── web1.yaml
+│   │   └── web2.yaml
+│   ├── templates
+│   │   ├── httpd.j2
+│   │   └── index.j2
+│   ├── tests
+│   │   ├── inventory
+│   │   └── test.yml
+│   └── vars
+│       └── main.yml
+
+
+tasks
+
+Mai playbook- name: "include pack"
+  import_tasks: web1.yaml
+  when:
+          ansible_facts['ansible_distribution'] == "CentOS"
+- name: "inc pack"
+  import_tasks: web2.yaml
+  when:
+          ansible_facts['ansible_distribution'] == "Ubuntu"
+
+- name: "lookup some *.txt files"
+  shell: "find  *.conf"
+  args:
+          chdir: /etc
+  register: find_output
+- debug:
+        msg: Dir is {{output}}
+
+- name: "create stuff"
+  group:
+          name: "{{groupd}}"
+          state: present
+
+- name: "create more stuff"
+  user:
+          name: "{{userd}}"
+          state: present
+          
+khgr684@MXGDXL2148EFCB4:~/project$ cat project.yaml
+- hosts: myhosts
+  roles:
+          - role: mamalon
+          
+ web1
+ - name: template conf file
+  template:
+        src: /home/khgr684/project/mamalon/templates/httpd.j2
+        dest: /etc/httpd/conf/httpd.conf
+  notify:
+      - restart httpd
+
+- name: index file
+  template:
+        src: i/home/khgr684/project/mamalon/templates/index.j2
+        dest: /var/www/html/index.html
+  notify:
+      - restart httpd
+
+- yum:
+        name: "{{web}}"
+        state: present
+- service:
+        name: httpd
+        state: started
+        
+        
+        
+web2
+- template:
+        src: /home/khgr684/httpd.j2
+        dest: /etc/httpd/conf/httpd.conf
+- template:
+        src: /home/khgr684/index.j2
+        dest: /var/www/html/index.html
+- apt:
+        name: "{{webserv7}}"
+        state: present
+- service:
+        name: httpd
+        state: started
+        
+        
+ khgr684@MXGDXL2148EFCB4:~/project$ cat mamalon/handlers/main.yml
+- name: restart httpd
+  service:
+          name: httpd
+          state: restarted
+          
+          
+          
+          
+  ---
+# vars file for web
+web: httpd
+pt: "8080"
+id: "Francisco Garcia"
+userd: "deploy"
+groupd: "deloitte"
+webserv7: "apache2"
+ 
+
