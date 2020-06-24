@@ -173,6 +173,102 @@ positional arguments:
 
 ==============================
 Project - https://www.devopsschool.com/blog/ansible-role-project-1/
+========================================================================
+========================================================================
+Ansible Tower
+-------------------------
+
+Problems in Ansible
+=========================
+ACS 
+	Logs to be stored - Missing.
+	Historials Reports - Missinng
+	Ability to Manage multiple Orgnization using Ansible
+	--------------------------	
+	Org1
+		Users
+		admin
+		playbook
+		inventory
+		secrets
+	
+	Org2
+		Users
+		admin
+		playbook
+		inventory
+		secrets
+
+	Dashboard is missing
+	Notification is missing
+	LDAP enabled is missing
+	API Based request is missing
+	---------------------------------
+	Ansible Tower
+		CENTOS  - DONE
+		UBUNTU
+
+\
+======================
+13.233.59.140
+Architecuture of Tower -
+====================================== 
+WEB Ngnx
+App - Django Pythonb framework
+DB - PS
+Queue - RabbitMQ
+Ansible CMD
+
+
+
+==============================
+
+Basic workflow with Ansible Tower
+========================================
+Step 1 - Set Authenticaton
+
+Step 2 - Create Org
+
+Step 3 - Set NOTIFICATION TEMPLATES
+		 - email
+
+Step 4 - Adding user and team under org.
+		Team 		User
+		-------------------------
+		admin
+		dev
+				rajesh
+		manager
+Step 5 - Set Rajesh as a Project Admin.
+
+Step 6 - Add ORG admin
+
+Step 7 - Add a all cred of ARS of your ORG.
+
+Step 8 - Add inventory - 13.233.81.199
+
+Step 9 - Create a project
+	https://github.com/devopsschool-demo-labs-projects/ansible-hello-world-role
+
+Step 10 - Create a template 
+	
+Step 11 - Run a template.
+
+Ansible-playbook -i inventory site.yaml -u=user -key==sddsa
+-----------------------------------------------------------
+		  DONEEEEEEEE  DONEEE	DONEEEEEEEEEEEEEEEE
+
+
+
+13.127.66.161	ARS
+15.206.149.26	ARS
+13.127.135.131	ARS
+
+
+
+
+
+
 
 
 
