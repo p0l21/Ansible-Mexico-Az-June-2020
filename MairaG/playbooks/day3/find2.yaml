@@ -1,0 +1,11 @@
+- hosts: localhost
+  tasks:
+  - name: Ansible find files in subdirectory examples
+    find:
+      paths: /etc
+      patterns: "host*"
+      recurse: yes
+    register: files_found
+
+  - debug:
+      msg: "{{ files_found.files[0].path }}"

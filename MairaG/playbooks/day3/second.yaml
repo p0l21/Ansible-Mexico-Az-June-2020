@@ -1,0 +1,11 @@
+    - name: execute a shell  command
+      shell: find /etc -name "net*" 
+      register: etc_files
+ 
+    - name: I am going to print find output by printing the var contects 
+      debug:
+        var: etc_files
+ 
+    - name: etc_files contnte with stdout
+      debug:
+        msg:  "FIND OUTPUT for net* search: {{ etc_files.stdout }}"

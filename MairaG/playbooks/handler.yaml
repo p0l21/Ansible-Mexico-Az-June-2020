@@ -1,0 +1,17 @@
+---
+- hosts: localhost
+  tasks:
+    - name: Install httpd
+      service:
+        name: httpd 
+        state: started
+      notify:
+        - replace index1.html
+
+  handlers:
+    - name: replace index1.html
+      copy:
+        dest: /var/www/html/index1.html
+        src: index1.html
+      register: copy_replace
+ 

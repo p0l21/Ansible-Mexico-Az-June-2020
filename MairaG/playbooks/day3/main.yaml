@@ -1,0 +1,10 @@
+---
+- name: This sets up an httpd webserver
+  hosts: web
+  tasks:
+  - name: restart the httpd service
+    service: name=httpd state=started
+  - name: Include task list in play
+    include: second.yaml
+  - name: find dev ip
+    include: third.yaml

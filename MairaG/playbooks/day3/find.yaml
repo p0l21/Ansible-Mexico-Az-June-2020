@@ -1,0 +1,30 @@
+- name: find in ansible testing....
+  hosts: localhost
+  tasks:
+    - name: testing find module
+      find:
+        paths: /etc
+        patterns: host*
+        file_type: file
+      register: find_salida  
+    - name: how output
+      debug:
+        var: find_salida
+    - name: how output
+      debug:
+      with_items:
+         - "{{ find_salida }}"
+
+    - name: compare ls output
+      shell: ls /etc/host*
+      register: ls_salida
+    - name: show debug msg output
+      debug:
+        msg: " LS: {{ ls_salida }} "
+    - name: show debug VAR output
+      debug:
+        var: ls_salida 
+    - name: how output withitems
+      debug:
+      with_items:
+         - "{{ ls_salida }}"

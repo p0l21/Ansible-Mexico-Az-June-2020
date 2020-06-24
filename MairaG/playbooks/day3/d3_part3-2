@@ -1,5 +1,5 @@
 - name: This sets up an httpd webserver
-  hosts: web
+  hosts: DEV QA
   tasks:
   - name: Install the httpd apps
     yum: name=httpd state=present
@@ -7,9 +7,15 @@
   - name: Install the apache2 apps
     apt: name=apache2 state=present
     when: ansible_os_family == "Debian"
-
-
+  - name: Template a file to /etc/files.conf
+    template:
+      src: index2.html.j2
+      dest: /var/www/html/index2.html
+  - name: Template a file to /etc/files.conf
+    template:
+      src: httpd.conf.j2
+      dest: /etc/httpd/conf/httpd.conf
   - debug:
-      msg:  Dires under etc are {{ find_output.stdout }}
+      msg: Packeage installed {{ port }}
 ...	
 

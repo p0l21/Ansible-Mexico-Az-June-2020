@@ -1,0 +1,8 @@
+# third.yaml to be called from main. Day3 lab3 -exe 3
+---
+    - name: connect to hostame get IP
+      shell: ip a s | grep eth0
+      register: dev_ip
+    - name: Show me the output
+      debug:
+        msg: "This DEV's IP: {{ dev_ip }}" 

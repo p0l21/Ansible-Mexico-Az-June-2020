@@ -1,0 +1,6 @@
+---
+# vars file for web
+    name: "--rajesh kumar in playbook--"
+    message: "Hello everyone"
+    package: httpd
+    port: 81

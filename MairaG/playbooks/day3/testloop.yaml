@@ -1,0 +1,20 @@
+  tasks:
+  - name: Install the git - ntp - vim apps
+    yum: name={{ item }} state=present
+    with_items:
+      - git
+      - ntp
+      - vim
+    when: ansible_os_family == "RedHat"
+  - name: Install the apache2 apps
+    apt: name={{ package }} state=present
+    when: ansible_os_family == "Debian"
+  - name: start the httpd service
+    service: name={{ package }} state=started
+  - name: create a empty fle
+    file: dest=/opt/test2.txt state=touch
+  - debug:
+      msg: My Name is {{ name }}  and my message is {{ message }}
+  - command: echo {{ item }}
+    loop: [ 0, 2, 4, 6, 8, 10 ]
+    when: item > 5

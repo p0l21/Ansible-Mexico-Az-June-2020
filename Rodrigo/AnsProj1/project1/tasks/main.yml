@@ -1,0 +1,11 @@
+---
+# tasks file for project1
+- hosts: rod
+  become: True
+
+  tasks:
+   - name: install httpd
+     yum:
+      name: {{ pkg }}
+      state: latest
+

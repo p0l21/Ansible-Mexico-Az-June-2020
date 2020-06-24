@@ -1,0 +1,5 @@
+---
+# tasks file for project
+  - name: Install httpd
+    yum:  name={{ package }} state=installed
+    when: ansible_os_family == "RedHat"

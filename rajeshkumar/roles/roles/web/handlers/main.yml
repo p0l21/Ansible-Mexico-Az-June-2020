@@ -1,0 +1,5 @@
+---
+# handlers file for web
+
+  - name: restart the httpd service
+    service: name={{ package }} state=restarted

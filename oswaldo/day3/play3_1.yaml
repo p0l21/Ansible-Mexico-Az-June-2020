@@ -18,4 +18,7 @@
     when: ansible_os_family == "RedHat"
   - name: list /etc
     shell: "ls {{ test_dir }}"
+    register: dir_out
+  - debug: var={{item}}
+    with_items: dir_out.stdout_lines
 ...
