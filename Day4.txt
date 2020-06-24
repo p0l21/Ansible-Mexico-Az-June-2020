@@ -1,0 +1,181 @@
+====================================
+Ansibble Roles	DONE
+Ansible Galaxy	DONE
+Ansible Vault	DONE
+====================
+PROJECT - On Role.
+
+Ansible with Windows
+Ansible Tower
+=====================================
+
+
+playbook.yaml
+		production_inv
+		dev_inv
+			production 
+				group_vars
+				host_vars
+			dev
+				group_vars
+				host_vars
+============================================
+What is Roles?
+=========================
+	Its way to manage a complexity of env.
+	
+	- So many variables for playbook
+	- So many tasks for playbook
+	- So many templates 
+	- So many handlers
+	- So many files and script
+	- I want to use his script along with mine?
+==================================================
+	Sharing YOUR CODE with Others????
+	- role
+
+	Its a directory stucture
+	Its a file system
+		for
+		- So many variables for playbook
+		- So many tasks for playbook
+		- So many templates 
+		- So many handlers
+		- So many files and script
+		- I want to use his script along with mine?
+
+
+=================
+13.127.116.251	ACS
+=================
+13.127.66.161	ARS
+15.206.149.26	ARS
+13.127.135.131	ARS
+
+[root@ip-172-31-12-16 roles]# ansible-galaxy init web
+- Role web was created successfully
+[root@ip-172-31-12-16 roles]# tree
+.
+└── web
+    ├── defaults		# This would contains default variables.
+    │   └── main.yml		# in this file.
+    ├── files			# This would contains all files/script used in the tasks.
+    ├── handlers		# This would contains handlers tasks 
+    │   └── main.yml		# in this file.
+    ├── meta
+    │   └── main.yml
+    ├── README.md
+    ├── tasks			# This would contains all tasks 
+    │   └── main.yml		# in this file.
+    ├── templates		# This would contains all .j2 files.
+    ├── tests			# This would contains All UT and AT test cases.
+    │   ├── inventory
+    │   └── test.yml
+    └── vars			# This would contains default variables.
+        └── main.yml		# in this file.
+
+9 directories, 8 files
+[root@ip-172-31-12-16 roles]#
+    ├── meta
+    │   └── main.yml
+
+- Name of the role
+- Author of the role
+- How to use it?
+- Copy right statement
+- Which version of Ansible
+- Which version of python
+- Dependency on other roles....
+
+Anttomy of the play
+------------------------------------
+https://www.devopsschool.com/blog/anatomy-of-ansible-play-defined/
+playbook
+	hosts
+	vars
+	vars_files
+	tasks
+	handlers
+	roles
+
+
+site.yaml
+===================================
+
+---
+- name: This sets up an httpd webserver
+  hosts: localhost
+  roles:
+   - web
+=====================================
+
+ 1101  ansible-playbook site.yaml			LOCALHOST
+ 1162  ansible-playbook -i inventory site.yaml		INVENTORY FILE
+ 1169  ansible-playbook -i production site.yaml		INVENTORY DIRECTORY
+===============================================
+Ansible Vault
+=========================================
+
+[root@ip-172-31-12-16 roles]# ansible-vault -h
+usage: ansible-vault [-h] [--version] [-v]
+                     {create,decrypt,edit,view,encrypt,encrypt_string,rekey}
+                     ...
+
+encryption/decryption utility for Ansible data files
+
+positional arguments:
+  {create,decrypt,edit,view,encrypt,encrypt_string,rekey}
+    create              Create new vault encrypted file
+    decrypt             Decrypt vault encrypted file
+    edit                Edit vault encrypted file
+    view                View vault encrypted file
+    encrypt             Encrypt YAML file
+    encrypt_string      Encrypt a string
+    rekey               Re-key a vault encrypted file
+
+1203  more inventory
+ 1204  clear
+ 1205  ls
+ 1206  ansible-vault -h
+ 1207  c.lear
+ 1208  clear
+ 1209  ls
+ 1210  ansible-vault encrypt inventory
+ 1211  more inventory
+ 1212  clear
+ 1213  ls
+ 1214  ansible-vault deencrypt inventory
+ 1215  ansible-vault decrypt inventory
+ 1216  ansible-vault decrypt inventory
+ 1217  more inventory
+ 1218  clear
+ 1219  clear
+ 1220  ansible-vault encrypt inventory
+ 1221  more inventory
+ 1222  clear
+ 1223  ansible-playbook -i inventory site.yaml
+ 1224  clear
+ 1225  ansible-playbook -h
+ 1226  clear
+ 1227  ansible-playbook -i inventory site.yaml --ask-vault-pass
+
+1229  clear
+ 1230  ls
+ 1231  ansible-vault create
+ 1232  ansible-vault create pass
+ 1233  ls
+ 1234  more pass
+ 1235  ansible-vault view pass
+ 1236  ansible-vault edit pass
+ 1237  more pass
+ 1238  ansible-vault view pass
+ 1239  history
+
+==============================
+Project - https://www.devopsschool.com/blog/ansible-role-project-1/
+
+
+
+
+
+

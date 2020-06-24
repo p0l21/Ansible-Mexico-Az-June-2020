@@ -1,0 +1,91 @@
+play21
+- hosts: local
+  roles:
+          - common
+        
+  roles
+   cat roles/common/tasks/web1.yaml
+- yum:
+        name: "{{webserv6}}"
+        state: present
+        
+ 
+ - hosts: local
+  roles:
+          - role: common
+            vars:
+                    webserv6: httpd
+
+play22
+- hosts: local
+  vars_prompt:
+          - name: "webserv6"
+            prompt: "Package to install"
+  roles:
+          - role: common
+          
+          
+          
+ role:
+ - template:
+        src: /home/khgr684/httpd.j2
+        dest: /etc/httpd/conf/httpd.conf
+- yum:
+        name: "{{webserv6}}"
+        state: present
+      
+role
+
+khgr684@MXGDXL2148EFCB4:~$ cat roles/common/tasks/main.yaml
+- name: "include pack"
+  import_tasks: web1.yaml
+
+- name: "lookup some *.txt files"
+  shell: "find  *.conf"
+  args:
+          chdir: /etc
+  register: find_output
+- debug:
+        msg: Dir is {{find_output}}
+  
+  
+  playbook
+  
+  - hosts: local
+  vars:
+          webserv6: httpd
+          port: 81
+
+
+  roles:
+          - role: common
+
+
+role
+- template:
+        src: /home/khgr684/httpd.j2
+        dest: /etc/httpd/conf/httpd.conf
+- template:
+        src: /home/khgr684/index.j2
+        dest: /var/www/html/index.html
+- yum:
+        name: "{{webserv6}}"
+        state: present
+- service:
+        name: httpd
+        state: started
+        
+     
+playbook
+- hosts: local
+  vars:
+          webserv6: httpd
+          port: 81
+          id: "el chapo guzman"
+
+
+  roles:
+          - role: common
+  
+  
+        
