@@ -57,6 +57,94 @@ Check -
 	- Content of file - You decide.
 
 Assingment 
+================================================================================================
+How to Develop a Module
+============================================
+https://www.devopsschool.com/blog/ansible-module-sample-code-to-work-with-api-example-1/
+
+
+---
+- name: This sets up an httpd webserver
+  hosts: localhost
+
+  tasks:
+
+  - debug:
+      msg: My Name is Rajesh
+  - weather:
+      appkey: fe8f2030bd325e2f9c85a96ab20aaa9f
+      treshold: 2
+    register: output
+
+  - debug:
+      var: output.decision
+
+
+
+  - weather:
+      appkey: fe8f2030bd325e2f9c85a96ab20aaa9f
+      treshold: 6
+
+
+==================================
+
+---
+- hosts: localhost
+  connection: local
+  gather_facts: False
+  tasks:
+  - name: touch without state
+    touch:
+      file: ./me.txt
+    register: touch_out
+  - debug:
+      var: touch_out
+  - name: touchw with state (after create)
+    touch:
+       file: ./me.txt
+       state: present
+  - name: touch with absent
+    touch:
+       file: ./me.txt
+       state: absent
+  - name: touch absent with no file
+    touch:
+      file: ./me.txt
+      state: absent
+
+
+
+#touch.bash
+
+#!/bin/bash
+# import variables from ansible
+source $1
+state=${state:-present}
+if [[ $state == "present" ]]; then
+	if [ ! -e $file ]; then
+		touch $file
+		echo { \"changed\": true }
+		exit 0
+	else
+		echo { \"changed\": false }
+		exit 0
+	fi
+fi
+
+if [[ $state == "absent" ]]; then
+	if [ -e $file ]; then
+		rm $file
+		echo { \"changed\": true }
+		exit 0
+	else
+		echo { \"changed\": false}
+		exit 0
+	fi
+fi
+
+
+
+
 
 
 
