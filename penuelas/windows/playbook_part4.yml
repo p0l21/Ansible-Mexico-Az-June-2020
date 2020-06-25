@@ -1,0 +1,11 @@
+---
+- name: to create folder penuelas2 in windows
+  hosts: all
+  tasks:
+  - name: create user ansible
+    win_user:
+      name: ansible
+      state: present
+      password: "cholo271989#_"
+
+...

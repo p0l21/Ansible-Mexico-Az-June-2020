@@ -1,0 +1,18 @@
+---
+- name:  Day5
+  hosts: windows
+  tasks:
+    - name: Create the folder HPE
+      win_file:
+        path: C:\HPE
+        state: directory
+
+    - name: Create readme
+      win_file:
+        path: C:\HPE\readme.txt
+        state: touch
+    - name: Add content
+      win_file:
+        path: C:\HPE\readme.txt
+        line: "I love india by JorgeG"
+...

@@ -1,0 +1,15 @@
+---
+- name: my play win
+  hosts: windows
+  tasks:
+    - name: file ps1
+      win_file:
+        path: C:\HPE\Fausto\helloworld.ps1
+        state: touch
+    - name: Add a line to a file
+      win_lineinfile:
+       path: C:\HPE\Fausto\helloworld.ps1
+       line: mkdir devopsschool
+       newline: windows
+    - name: Run shell
+      win_shell: C:\HPE\Fausto\helloworld.ps1

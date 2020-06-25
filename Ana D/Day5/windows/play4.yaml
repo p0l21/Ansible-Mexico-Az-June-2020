@@ -1,0 +1,8 @@
+---
+- name: Write a playbook to install 7zip
+  hosts: windows
+  tasks:
+  - win_package:
+     path: https://www.7-zip.org/download.html
+     arguments: /install /passive /norestart
+...

@@ -1,0 +1,13 @@
+---
+- name: Customs modules penuelas
+  hosts: localhost
+  
+  tasks:
+  - debug:
+      msg: My Name is penuelas
+  - weather:
+      appkey: fe8f2030bd325e2f9c85a96ab20aaa9f
+      treshold: 200
+#  - weather:
+#      appkey: fe8f2030bd325e2f9c85a96ab20aaa9f
+#      treshold: 6

@@ -1,0 +1,16 @@
+---
+- name: to create folder penuelas2 in windows
+  hosts: all
+  tasks:
+  - name: create folder
+    win_file:
+      path: C:/HPE/penuelas/
+      state: directory
+
+  - name: create a file
+    win_lineinfile:
+      path: C:/HPE/penuelas/README.txt
+      line: "Jorge Luis Peñuelas"
+      create: yes
+ 
+...

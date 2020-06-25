@@ -1,0 +1,9 @@
+---
+- name: Write a playbook to Create user
+  hosts: windows
+  tasks:
+  - win_user:
+     name: ansible
+     password: Ansible1234*
+     state: present
+...

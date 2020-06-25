@@ -1,0 +1,6 @@
+- hosts: localhost
+  tasks:
+         - name: touch
+           touch:
+               file: fco.txt.txt
+               state: present

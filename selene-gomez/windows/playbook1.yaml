@@ -1,0 +1,15 @@
+
+
+---
+- name:  Playbook exec 1
+  hosts: windows
+  tasks:
+    - name: Create directory structure
+      win_file:
+        path: C:/HPE/
+        state: directory
+
+    - name: Copy a single file keeping the filename
+      win_copy:
+        src: myfile.txt
+        dest: C:/HPE/selene-readme.txt

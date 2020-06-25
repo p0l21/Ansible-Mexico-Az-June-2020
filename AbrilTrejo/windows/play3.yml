@@ -1,0 +1,6 @@
+- hosts: all
+  tasks:
+          - name: ensure httpd is installed
+            win_user:
+                    name: ansible
+                    password: "PasSWord!"

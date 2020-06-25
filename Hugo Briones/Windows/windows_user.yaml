@@ -1,0 +1,9 @@
+---
+- name: Create a Windows User
+  hosts: windows
+
+  tasks:
+  - name: Create a User
+    win_user: name=Hugo password=Astra_123
+
+...

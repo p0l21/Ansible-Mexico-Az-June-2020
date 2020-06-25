@@ -1,0 +1,10 @@
+---
+- name:  Day5
+  hosts: windows
+  tasks:
+    - name: Create  Ansible user
+      win_user:
+        name: ansible
+        password: ansible12345..
+
+...

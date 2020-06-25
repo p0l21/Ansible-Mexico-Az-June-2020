@@ -1,0 +1,9 @@
+---
+- name: download a file in remote windows
+  hosts: windows
+  tasks:
+  - name: download file
+    win_get_url:
+      url: https://www.7-zip.org/download.html
+      dest: C:/HPE/oswaldo
+...

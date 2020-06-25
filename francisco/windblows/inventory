@@ -1,0 +1,10 @@
+[win]
+13.233.137.215 ansible_user=Administrator ansible_password="mdFS=TnvI.ke)Gfjty5E%;5J&P7F%mR-" ansible_connection=winrm ansible_winrm_transport=basic ansible_winrm_server_cert_validation=ignore
+
+[windows:vars]
+ansible_user=Administrator
+ansible_password=mdFS=TnvI.ke)Gfjty5E%;5J&P7F%mR-
+ansible_connection=winrm
+ansible_winrm_transport=basic
+ansible_winrm_server_cert_validation=ignore
+

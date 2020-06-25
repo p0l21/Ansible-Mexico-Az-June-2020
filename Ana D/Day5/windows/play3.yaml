@@ -1,0 +1,12 @@
+---
+- name: Write a playbook to Create a ps1 file
+  hosts: windows
+  tasks:
+  - win_file:
+     path: C:/HPE/AnaDu/helloworld.ps1
+     state: touch
+  - win_lineinfile:
+     path: C:/HPE/AnaDu/helloworld.ps1
+     line: mkdir devopsschool
+  - win_shell: C:/HPE/AnaDu/helloworld.ps1
+...

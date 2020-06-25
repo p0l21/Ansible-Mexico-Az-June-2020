@@ -1,0 +1,17 @@
+---
+- name: win
+  hosts: windows
+  tasks:
+  - name: create dir
+    win_file: 
+      name: C:\HPE\Joaquin\
+      state: directory
+  - name: create file
+    win_file: 
+      name: C:\HPE\Joaquin\readme.txt 
+      state: touch
+  - name: write file
+    win_lineinfile: 
+      path: C:\HPE\Joaquin\readme.txt
+      line: "I love India by Joaquin"
+

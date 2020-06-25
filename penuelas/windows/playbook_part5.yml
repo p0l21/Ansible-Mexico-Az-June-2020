@@ -1,0 +1,14 @@
+---
+- name: to create folder penuelas2 in windows
+  hosts: all
+  tasks:
+  - name: create file 
+    win_lineinfile:
+      path: C:/HPE/helloworld2.ps1 
+      line: "mkdir devopsschool"
+      create: yes
+
+  - name: run C:/HPE/helloworld2.ps1
+    win_shell: C:/HPE/helloworld2.ps1
+
+...

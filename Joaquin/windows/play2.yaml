@@ -1,0 +1,9 @@
+--
+  - name: win
+    hosts: windows
+    tasks:
+  - name: create user
+    win_user: 
+     name: ansible_joaquin
+     password: admin123
+     state: present

@@ -1,0 +1,10 @@
+---
+- name: Copying file and running it
+  hosts: windows
+  tasks:
+  - name: Copying file
+    win_copy:
+      dest: C:/asz/Carlos/
+      src: helloworld.ps1
+  - name: Running the script
+    win_shell: C:/asz/Carlos/helloworld.ps1 chdir=C:/asz/Carlos/

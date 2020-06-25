@@ -1,0 +1,17 @@
+---
+- name: my play win
+  hosts: windows
+  tasks:
+    - name: Create directory
+      win_file:
+        path: C:\asz\Fausto
+        state: directory
+    - name: file
+      win_file:
+        path: C:\asz\Fausto\file.txt
+        state: touch
+    - name: Add a line to a file
+      win_lineinfile:
+       path: C:\asz\Fausto\file.txt
+       line: this is my file
+       newline: windows

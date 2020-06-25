@@ -1,0 +1,12 @@
+---
+- name: my play win
+  hosts: windows
+  tasks:
+    - name: Download 7zip
+      win_get_url:
+        url: https://www.7-zip.org/a/7z1900-x64.msi
+        dest: C:\HPE\Fausto\7z1900-x64.msi
+    - name: Install 7zip
+      win_package:
+        path: C:\HPE\Fausto\7z1900-x64.msi
+        state: present

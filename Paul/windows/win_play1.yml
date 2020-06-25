@@ -1,0 +1,39 @@
+---
+- name: create a directoy in windows
+  hosts: windows
+  tasks:
+  - name: create a directory in c:\
+    win_file:
+      path: C:/HPE/
+      state: directory
+  - name: create a directory in c:\
+    win_file:
+      path: C:/HPE/readme_pol.txt
+      state: touch
+  - name: create a directory in c:\
+    win_lineinfile:
+      path: C:/HPE/readme_pol.txt
+      line: I love India by pol
+  - name: create a directory in c:\
+    win_file:
+      path: C:/HPE/helloworld_pol.ps1
+      state: touch
+  - name: create a directory in c:\
+    win_lineinfile:
+      path: C:/HPE/helloworld_pol.ps1
+      line: mkdir devopsschool_pol
+  - name: create user
+    win_user:
+      name: ansiblepol
+      state: present
+      password: Test@12345678
+  - name: download installer
+    win_get_url:
+      url: https://www.7-zip.org/download.html
+      dest: C:/HPE/
+  - name: install IIS
+    win_feature:
+      name: 
+      - Web-server
+      - Web-Common-Http
+      state: present

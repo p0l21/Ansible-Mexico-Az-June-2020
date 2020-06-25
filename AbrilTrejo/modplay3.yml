@@ -1,0 +1,24 @@
+
+---
+- hosts: localhost
+  connection: local
+  gather_facts: False
+  tasks:
+  - name: touch without state
+    touch:
+      file: ./abril.txt
+    register: touch_out
+  - debug:
+      var: touch_out
+  - name: touchw with state (after create)
+    touch:
+       file: ./abril.txt
+       state: present
+  - name: touch with absent
+    touch:
+       file: ./abril.txt
+       state: absent
+  - name: touch absent with no file
+    touch:
+      file: ./abril.txt
+      state: absent

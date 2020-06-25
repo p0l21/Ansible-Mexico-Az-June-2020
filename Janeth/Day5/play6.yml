@@ -1,0 +1,10 @@
+---
+- name: Day5
+  host: localhost
+  tasks:
+  - name: touchfile
+    touch:
+      file: Janeth.txt
+      state: present
+...
+

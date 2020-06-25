@@ -1,0 +1,6 @@
+- hosts: windows
+  tasks:
+          - name: ensure httpd is installed
+            win_copy:
+                    src: ruben.txt
+                    dest: c:\hpe\ruben.txt

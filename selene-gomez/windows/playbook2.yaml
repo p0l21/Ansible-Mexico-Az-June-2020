@@ -1,0 +1,11 @@
+
+
+---
+- name:  User
+  hosts: windows
+  tasks:
+    - name: Create user
+      win_user:
+        name: ansible
+        password: ansible
+        state: present

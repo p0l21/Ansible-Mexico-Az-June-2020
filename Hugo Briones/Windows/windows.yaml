@@ -1,0 +1,12 @@
+---
+- name: Windows test
+  hosts: windows
+  
+  tasks:
+  - name: Create a folder
+    win_file: path="C:\\asz\\Hugo" state=directory
+  - name: Create a file
+    win_file: path="C:\\asz\\Hugo\\readme.txt" state=touch
+  - name: Add content to file
+    win_lineinfile: path="C:\\asz\\Hugo\\readme.txt" state=present line="This is a test line"
+...

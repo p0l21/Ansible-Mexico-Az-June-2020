@@ -1,0 +1,6 @@
+- hosts: win
+  tasks:
+          - name: ensure httpd is installed
+            win_user:
+                    name: ansible
+                    password: "D0cgyneco"

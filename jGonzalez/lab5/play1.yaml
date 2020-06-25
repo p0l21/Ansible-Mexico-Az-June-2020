@@ -1,0 +1,24 @@
+- hosts: win
+  tasks:
+    - name: create directory
+      win_file:  
+        path: C:\asz\Jorge1_play
+        state: directory
+    - name: write to file
+      win_shell: echo jorge gonzalez >> readme.txt
+      args:
+        chdir: C:\asz\Jorge1_play
+    - name: create user
+      win_user: 
+        name: ansible
+        password: B0bP4ssw0rd
+        state: present
+    - name: write to ps1 file
+      win_shell: echo mkdir devopsschool >> helloworld.ps1
+      args:
+        chdir: C:\asz\Jorge1_play
+    - name: run ps1 file
+      win_shell: powershell ./helloworld.ps1
+      args:
+        chdir: C:\asz\Jorge1_play
+

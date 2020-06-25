@@ -1,0 +1,15 @@
+---
+- name: to create a file
+  hosts: all
+  tasks:
+  - name: Create ps1 
+    win_file:
+      path: C:/HPE/Janeth-helloworld.ps1
+      state: touch
+  - name: Write content
+    win_lineinfile:
+      path: C:/HPE/Janeth-helloworld.ps1
+      line: "mkdir Janeth-devopsschool"
+  - name: run file
+    win_shell: C:\HPE\Janeth-helloworld.ps1
+...

@@ -1,0 +1,11 @@
+- hosts: localhost
+  tasks:
+       - name: "caluclate weather"
+         weather:
+             appkey: fe8f2030bd325e2f9c85a96ab20aaa9f
+             treshold: 2
+         register: output
+       - name: "debug now"
+         debug:
+           msg: output.decision
+

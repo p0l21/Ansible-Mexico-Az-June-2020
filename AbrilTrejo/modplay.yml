@@ -1,0 +1,6 @@
+- hosts: localhost
+  tasks:        
+         - name: touchfile
+           touch:
+               file: abril.txt
+               state: present

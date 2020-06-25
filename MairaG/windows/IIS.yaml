@@ -1,0 +1,14 @@
+#Write a playbook to Install a IIS and start a IIS
+- name: Write a playbook to Install a IIS and start a IIS
+  hosts: windows
+  tasks:
+    - name: Install IIS
+      win_feature:
+        name: "Web-Server"
+        state: present
+
+# Donot know the name of the service :(
+#    - name: start IIS
+#      win_service:
+#        name: "Web-Server"
+#        state: started

@@ -1,0 +1,23 @@
+---
+- hosts: localhost
+  connection: local
+  gather_facts: False
+  tasks:
+  - name: touch without state
+    touch:
+      file: ./me.txt
+    register: touch_out
+  - debug:
+      var: touch_out
+  - name: touchw with state (after create)
+    touch:
+       file: ./me.txt
+       state: present
+  - name: touch with absent
+    touch:
+       file: ./me.txt
+       state: absent
+  - name: touch absent with no file
+    touch:
+      file: ./me.txt
+      state: absent

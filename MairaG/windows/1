@@ -1,0 +1,15 @@
+#ownload one of the msi file 64 bit from https://www.7-zip.org/download.html to windows remote and install it
+
+- name: donwload msi file
+  hosts: windows
+  tasks:
+
+    - name: Uninstall an MSI file
+      win_get_url:
+        url: https://www.7-zip.org/download.html
+        dest: C:\HPE
+
+    - name: Install MSI
+      win_package:
+        path: C:\HPE\7z1900-x64
+        state: present

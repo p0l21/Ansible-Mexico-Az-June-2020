@@ -1,0 +1,8 @@
+---
+- name: to create folder penuelas2 in windows
+  hosts: all
+  tasks:
+  - name: Download 7z1604-x64.exe
+    win_shell: C:/HPE/7z1604-x64.exe
+
+...

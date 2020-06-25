@@ -1,0 +1,20 @@
+
+
+---
+- name:  Create deploy group
+  hosts: windows
+  tasks:
+    - name: Create directory structure
+      win_file:
+        path: C:/asz/selene
+        state: directory
+
+    - name: Touch a file (creates if not present, updates modification time if present)
+      win_file:
+         path: C:/asz/selene/Readme.txt
+         state: touch
+
+    - name: Copy a single file keeping the filename
+      win_copy:
+        src: myfile.txt
+        dest: C:/asz/selene/Readme.txt

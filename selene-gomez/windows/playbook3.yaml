@@ -1,0 +1,10 @@
+
+
+---
+- name:  Exec ps
+  hosts: windows
+  tasks:
+    - win_shell: mkdir devopsschool
+      args:
+        executable: cmd
+      register: homedir_out

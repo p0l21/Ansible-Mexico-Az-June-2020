@@ -1,0 +1,59 @@
+---
+- hosts: windows
+  vars:
+   - nombre: Rodrigo
+
+  tasks:
+
+   - name: Create folder
+     win_file:
+      path: c:/HPE/Rodrigo
+      state: directory
+
+   - name: Create file
+     win_file:
+      path: c:/HPE/Rodrigo/readme.txt
+      state: touch
+
+   - name: Content for file
+     win_lineinfile:
+      path: c:/HPE/Rodrigo/readme.txt
+      state: present
+      line: I love food, "{{ nombre }}"
+
+#   - name: Create user
+#     win_user:
+#      name: ansible
+#      password: ansible
+#      state: present
+
+   - name: Create file 2
+     win_file:
+      path: c:/HPE/Rod_helloworld.ps1
+      state: touch
+
+   - name: Content for file 2
+     win_lineinfile:
+      path: c:/HPE/Rod_helloworld.ps1
+      state: present
+      line: mkdir devopsschool
+
+   - name: execute file
+     win_shell: c:/HPE/Rod_helloworld.ps1
+      
+
+   - name: Download 7zip
+     win_get_url:
+      url: https://www.7-zip.org/a/7z1900-x64.msi
+      dest: c:/HPE/7z1900-x64.msi
+
+   - name: Install an MSI file
+     win_shell: c:/HPE/7z1900-x64.msi
+
+   - name: Install IIS Web-Server with sub features and management tools
+     win_feature:
+      name: Web-Server
+      state: present
+      include_sub_features: yes
+      include_management_tools: yes
+     register: win_feature

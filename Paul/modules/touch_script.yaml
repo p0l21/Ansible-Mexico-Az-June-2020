@@ -1,0 +1,9 @@
+---
+- name: create an empty file through script
+  hosts: localhost
+  tasks:
+  - name: touch with script
+    create_file:
+      file: ./pol.txt
+      state: present
+...

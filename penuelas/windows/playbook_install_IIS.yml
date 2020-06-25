@@ -1,0 +1,14 @@
+---
+- name: to create folder penuelas2 in windows
+  hosts: all
+  tasks:
+  - name: To install IIS
+    win_feature:
+      name: Web-Server
+      state: present
+
+  - name: Reboot if installing Web-Server feature requires it
+    win_reboot:
+    when: win_feature.reboot_required
+
+...

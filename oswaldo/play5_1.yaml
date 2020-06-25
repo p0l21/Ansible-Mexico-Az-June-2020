@@ -1,0 +1,20 @@
+---
+- name: 1 This  creates a remote directory in windows server
+  hosts: windows
+  tasks:
+    - name: create a directory in remote windows
+      win_file:
+        path: C:/HPE/oswaldo
+        state: directory
+
+    - name: create a file in remote windows
+      win_file:
+        path: C:/HPE/oswaldo/readme.txt
+        state: touch
+
+    - name: insert a line in remote windows
+      win_lineinfile:
+        line: I love india by oswaldo
+        path: C:/HPE/oswaldo/readme.txt
+        state: present
+...

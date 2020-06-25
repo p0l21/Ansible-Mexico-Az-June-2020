@@ -1,0 +1,15 @@
+---
+- name: to create folder Janeth in Windows
+  hosts: all
+  tasks:
+  - name: create folder
+    win_file:
+      path: C:/asz/janeth_playbook/
+      state: directory
+
+  - name: Create file
+    win_lineinfile:
+      path: C:/asz/janeth_playbook/act2.txt
+      line: "Welcome to ansible in windows"
+      create: yes
+...

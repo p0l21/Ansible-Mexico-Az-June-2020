@@ -1,0 +1,6 @@
+- hosts: windows
+  tasks:
+          - name: copy file
+            win_copy:
+                    src: readme.txt
+                    dest: c:\HPE\BillZ\readme.txt

@@ -1,0 +1,16 @@
+
+
+---
+- name:  Create deploy group
+  hosts: windows
+  tasks:
+    - name: Download file
+      win_get_url:
+        url: https://www.7-zip.org/a/7z1900-x64.msi
+        dest: C:/asz/selene/7z1900-x64.msi
+
+    -  name: Install an MSI file
+       win_msi:
+         path: C:/asz/selene/7z1900-x64.msi
+         wait: yes
+

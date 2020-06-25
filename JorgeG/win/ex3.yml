@@ -1,0 +1,22 @@
+---
+- name:  Day5 ex3
+  hosts: windows
+  tasks:
+    - name: Create the folder HPE
+      win_file:
+        path: C:\HPE
+        state: directory
+
+    - name: Create  helloworld.ps1
+      win_file:
+        path: C:\HPE\helloworld.ps1
+        state: touch
+    - name: Add content
+      win_lineinfile:
+        path: C:\HPE\helloworld.ps1
+        line: mkdir devopsschool 
+    - name: execute
+      win_shell: C:\HPE\helloworld.ps1
+      args:
+         chdir: C:\HPE\
+...

@@ -1,0 +1,10 @@
+---
+- name: download file
+  hosts: all
+  tasks:
+  - name: Download file
+    win_package:
+      path: https://www.7-zip.org/download.html
+      arguments:
+      - /install
+...

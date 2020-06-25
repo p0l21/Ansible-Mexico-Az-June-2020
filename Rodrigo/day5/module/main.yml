@@ -1,0 +1,12 @@
+---
+- name: This sets up an httpd webserver
+  hosts: localhost
+  tasks:
+  - debug:
+      msg: My Name is Rajesh
+  - weather:
+      appkey: fe8f2030bd325e2f9c85a96ab20aaa9f
+      treshold: 2
+    register: output
+  - debug:
+      var: output.decision

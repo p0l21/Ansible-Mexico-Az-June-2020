@@ -1,0 +1,10 @@
+#Write a playbook to Create a user named with “ansible” and password “ansible in Windows server
+- name: Create user and pass
+  hosts: windows
+  tasks:
+
+    - name: Create user and pass
+      win_user:
+        name: ansible
+        password: Test.123
+        state: present

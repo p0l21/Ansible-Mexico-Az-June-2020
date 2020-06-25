@@ -1,0 +1,4 @@
+- hosts: win
+  tasks:
+          - name: ensure httpd is installed
+            win_shell: c:\hpe\helloworld.ps1

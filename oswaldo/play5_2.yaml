@@ -1,0 +1,10 @@
+---
+- name: 1 This  creates a local windows user in a remote server
+  hosts: windows
+  tasks:
+    - name: create a user in remote windows
+      win_user:
+        name: oswaldoansible
+        state: present
+        password: Test@12345678
+...

@@ -1,0 +1,15 @@
+#Create a file called “helloworld.ps1” in C:\HPE\ with content “mkdir devopsschool” and run a helloworld.ps1
+- name: file called “helloworld.ps1” in C:\HPE\ with content “mkdir devopsschool” and run a helloworld.ps1
+  hosts: windows
+  tasks:
+
+    - name: Create file
+      win_file:
+        path: C:\HPE\helloworld.ps1
+        state: touch
+    - name: Inline to file
+      win_lineinfile:
+        path: C:\HPE\helloworld.ps1
+        line: mkdir devopsschool
+    - name: Run helloworld.ps1
+      win_shell: C:\HPE\helloworld.ps1 

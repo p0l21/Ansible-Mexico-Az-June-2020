@@ -1,0 +1,9 @@
+---
+- name: my play win
+  hosts: windows
+  tasks:
+    - name: Create user win
+      win_user:
+        name: ansible-fausto
+        password: B0bP4ssw0rd
+        state: present

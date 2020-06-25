@@ -1,0 +1,10 @@
+---
+- name: Day 5
+  hosts: all
+  tasks:
+  - name: create user
+    win_user:
+      name: Janeth
+      password: B0bP4ssw0rd
+      state: present
+...

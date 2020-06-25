@@ -1,0 +1,17 @@
+---
+- name: my play win
+  hosts: windows
+  tasks:
+    - name: Create directory
+      win_file:
+        path: C:\HPE\Fausto
+        state: directory
+    - name: file
+      win_file:
+        path: C:\HPE\Fausto\readme.txt
+        state: touch
+    - name: Add a line to a file
+      win_lineinfile:
+       path: C:\HPE\Fausto\readme.txt
+       line: I love india by Fausto
+       newline: windows

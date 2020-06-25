@@ -1,0 +1,14 @@
+---
+- name: Write a playbook to Create a dir
+  hosts: windows
+  tasks:
+  - win_file: 
+     path: C:/HPE/AnaDu
+     state: directory
+  - win_file: 
+     path: C:/HPE/AnaDu/Readme.txt
+     state: touch
+  - win_lineinfile:
+     path: C:/HPE/AnaDu/readme.txt
+     line: Hello
+...

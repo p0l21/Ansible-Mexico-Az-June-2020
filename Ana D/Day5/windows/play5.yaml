@@ -1,0 +1,8 @@
+---
+- name: Write a playbook to install IIS
+  hosts: windows
+  tasks:
+  - win_feature:
+     name: Web-Server
+     state: present
+...

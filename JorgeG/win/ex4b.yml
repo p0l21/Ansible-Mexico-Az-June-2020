@@ -1,0 +1,13 @@
+---
+- name:  Day5 ex3
+  hosts: windows
+  tasks:
+    - name: Create the folder HPE
+      win_file:
+        path: C:\asz
+        state: directory
+
+    - name:  install 7zip
+      win_package:
+        path: https://www.7-zip.org/a/7z1900-x64.msi
+...

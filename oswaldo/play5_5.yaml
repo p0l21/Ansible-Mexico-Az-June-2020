@@ -1,0 +1,10 @@
+---
+- name: installs iis in remote windows server
+  hosts: windows
+  tasks:
+    - name: install IIS in remote windows server
+      win_feature:
+        name:
+        - Web-server
+        - Web-Common-Http
+...

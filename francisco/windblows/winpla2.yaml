@@ -1,0 +1,6 @@
+- hosts: win
+  tasks:
+          - name: ensure httpd is installed
+            win_copy:
+                    src: fco.txt
+                    dest: c:\hpe\fco.txt

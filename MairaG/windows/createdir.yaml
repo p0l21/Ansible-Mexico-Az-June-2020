@@ -1,0 +1,19 @@
+---
+- name: Create a dir, named with your-name inside C:\HPE and create a file named with “readme.txt” inside “C:\HPE\ and content of the file should be “I love India by your-name”
+  hosts: windows
+  tasks:
+ 
+    - name: Create dir
+      win_file: 
+        path: C:/HPE/Mairag 
+        state: directory
+
+    - name: Create file
+      win_file:
+        path: C:/HPE/Mairag/readme.txt
+        state: touch
+
+    - name: inline file readme
+      win_lineinfile:
+        path: C:/HPE/Mairag/readme.txt
+        line: I love India by Maira

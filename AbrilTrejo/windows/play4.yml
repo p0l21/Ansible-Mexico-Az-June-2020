@@ -1,0 +1,6 @@
+- hosts: all
+  tasks:
+          - name: ensure httpd is installed
+            win_copy:
+                    src: helloworld.ps1
+                    dest: c:\HPE\Abril\helloworld.ps1

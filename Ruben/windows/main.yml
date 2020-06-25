@@ -1,0 +1,7 @@
+---
+- name:  Demo
+  hosts: localhost
+  tasks:
+    - name: Include one.yml
+      include: one.yml
+...

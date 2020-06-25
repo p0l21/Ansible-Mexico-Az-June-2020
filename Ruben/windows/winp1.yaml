@@ -1,0 +1,6 @@
+- hosts: windows
+  tasks:
+          - name: ensure httpd is installed
+            win_file:
+                    path: c:/hpe
+                    state: directory
