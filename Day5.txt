@@ -1,0 +1,66 @@
+- Ansible with Windows
+- Ansible Module Development
+- Ansible Plugins 
+	 - Lookups
+=============================================================
+
+Human --> Ansible Control Server ----> Ansible remote Server(S)
+		ACS				ARS
+		LINUX				WINDOWS
+		PYHON  2.7			DOTNET 4.X + PS 3.0 + WINRM 
+			-----------------------HTTP
+			-----------------------Authentication 
+							Various Mode
+						Authorization
+						port - 5628****
+
+		PY WINRM
+		
+=====================================================================
+BEHAVIOURAL Param.
+------------------
+Inventory.
+
+ACS 
+	13.126.129.250
+https://www.devopsschool.com/tutorial/ansible/ansible-windows-control-setup.html
+
+
+ARS
+	13.233.137.215
+	Administrator
+	Pass - mdFS=TnvI.ke)Gfjty5E%;5J&P7F%mR-
+https://www.devopsschool.com/tutorial/ansible/ansible-windows-remote-setup.html
+=============================================
+
+
+[windows:vars]
+ansible_user=Administrator
+ansible_password=mdFS=TnvI.ke)Gfjty5E%;5J&P7F%mR-
+ansible_connection=winrm
+ansible_winrm_transport=basic
+ansible_winrm_server_cert_validation=ignore
+
+================================================
+Windows ADHOC Commands
+Windows Playbook
+=================================
+	What is the module for Windows.
+	https://docs.ansible.com/ansible/latest/modules/list_of_windows_modules.html
+=====================================================
+cd /root/Ansible-Mexico-Az-June-2020/yourname
+
+Check - 
+	Using ADHOC commands
+	- Create a dir C:\asz\<YOURFIRST>
+	- Create a file C:\asz\<YOURFIRST\Readme.txt
+	- Content of file - You decide.
+
+Assingment 
+
+
+
+
+
+
+
