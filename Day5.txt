@@ -143,6 +143,37 @@ if [[ $state == "absent" ]]; then
 fi
 
 
+==========================
+https://www.devopsschool.com/blog/what-is-ansible-plugins-and-how-to-extend-ansible-through-plugins/
+https://www.devopsschool.com/blog/deep-dive-into-lookup-plugins-in-ansible-with-example/
+https://www.devopsschool.com/blog/deep-dive-into-jinja2-ansible-template-with-example/
+
+==============================================================================================
+QA - 
+
+==========================================
+Notes - https://github.com/devopsschool-training-notes
+Slides - HTML
+PDF - https://www.devopsschool.com/pdf/
+https://www.devopsschool.com/slides/ansible/ 
+Videos	- https://www.devopsschool.com/videos/
+Sample Programs - https://www.devopsschool.com/blog/devopsschool-github-referenece/
+Blogs - https://www.devopsschool.com/blog/?s=ansible+
+Tutorials - http://www.devopsschool.com/tutorial/ansible/ 
+Quiz and Dumps - https://www.devopsschool.com/lms/
+
+
+Not ready
+===================
+Commands - https://www.devopsschool.com/commands/
+https://www.devopsschool.com/shortcuts
+https://www.devopsschool.com/cheatsheets/
+
+
+How to reach out to me?
+============================
+DevOps@Rajeshkumar.xyz
+www.Rajeshkumar.xyz
 
 
 
